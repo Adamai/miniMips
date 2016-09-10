@@ -4,21 +4,33 @@ import java.io.*;
 
 public class TesteApp {
 	public static void main(String[] args){
-		String a = "02114020";
-		DecoderHexBin dec = new DecoderHexBin();
+		try{
 		
-		String binario = dec.convert(a);
-		System.out.println(binario);
-		
+		FileReader entrada = new FileReader("arquivos/entrada.txt");
+		BufferedReader ler = new BufferedReader(entrada);
+		FileWriter saida = new FileWriter("arquivos/saida.txt");
+		BufferedWriter escrever = new BufferedWriter(saida);
+		DecoderHexBin dec1 = new DecoderHexBin();
 		DecoderBinAsse dec2 = new DecoderBinAsse();
 		
-		String assembley = dec2.convert2(binario);
-		System.out.println(assembley);
 		
 		
-		String teste = "batata";
+		String linhaEntrada = ler.readLine();
+		while(linhaEntrada!=null){
+			String binario = dec1.convert(linhaEntrada);
+			String result = dec2.convert2(binario);
+			escrever.append(result);
+			escrever.newLine();
+			linhaEntrada = ler.readLine();
+		}
+		ler.close();
 		
-		System.out.println(teste.substring(1, 3));
+		escrever.close();
+		}
+		catch(IOException e){
+			System.out.println(e.getMessage());
+		}
+		
 	}
 	
 	
