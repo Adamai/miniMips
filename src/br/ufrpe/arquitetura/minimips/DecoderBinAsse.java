@@ -39,8 +39,22 @@ public class DecoderBinAsse {
 			break;
 		case"100010":resultOP="sub";
 			break;
-		
-		
+		case"001100":resultOP="syscall";
+			break;
+		case"001000":resultOP = "jr";
+			break;
+		case"011011":resultOP= "divu";
+			break;
+		case"011010":resultOP="div";
+			break;
+		case"011001":resultOP="multu";
+			break;
+		case"101010":resultOP="slt";
+			break;
+		case"010010":resultOP="mflo";
+			break;
+		case"010000":resultOP="mfhi";
+			break;
 		}
 		}
 		else if(tipo.equals("I")){ //INSTRUÇOES TIPO I
@@ -79,10 +93,10 @@ public class DecoderBinAsse {
 		String result="";
 		
 		if(tipo.equals("R")){
-			   r1= convertBin(entrada.substring(16, 21));
-			   r2= convertBin(entrada.substring(6, 11));
-			   r3= convertBin(entrada.substring(11, 16));
-			   r4= convertBin(entrada.substring(21,26));
+			   r1= convertBin(entrada.substring(16, 21)); //resposta-> 4ªseq
+			   r2= convertBin(entrada.substring(6, 11)); //operador-> 2ªseq
+			   r3= convertBin(entrada.substring(11, 16)); //operador-> 3ªseq
+			   r4= convertBin(entrada.substring(21,26)); //operador especial-> 5ªseq
 			   result = r1 + ", "+ r2 + ", "+r3;
 			switch(op){
 				case"add": result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3; 
@@ -99,9 +113,31 @@ public class DecoderBinAsse {
 					break;
 				case"srlv":result = "$"+r1 + ", "+ "$"+ r3 + ", "+ "$"+r2; 
 					break;
+				case"syscall":result = "";
+					break;
+				case"jr":result = "$"+r2;
+					break;
+				case"divu":result = "$"+r2 +", "+ "$"+r3;
+					break;
+				case"div":result = "$"+r2+", "+"$"+r3;
+					break;
+				case"multu":result = "$"+r2+", $"+r3;
+					break;
+				case"slt":result = "$"+r1+", $"+r2+", $"+r3;
+					break;
+				case"mflo":result= "$"+r1;
+					break;
+				case"mfhi":result= "$"+r1;
+				
 				
 	
 			}
+		}
+		if(tipo.equals("I")){
+			
+		}
+		if(tipo.equals("J")){
+			
 		}
 		
 		return result;

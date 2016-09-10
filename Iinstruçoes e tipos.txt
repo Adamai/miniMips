@@ -2,14 +2,14 @@ TIPO R
 	1.	ADD  - 000000 sssss ttttt ddddd 00000 100000 DONE(dan)
 	2.	ADDU - 000000 sssss ttttt ddddd 00000 100001
 	3.	AND  - 000000 sssss ttttt ddddd 00000 100100
-	4.	MFHI - 000000 00000 00000 ddddd 00000 010000
-	5.	MFLO - 000000 00000 00000 ddddd 00000 010010
+	4.	MFHI - 000000 00000 00000 ddddd 00000 010000 DONE(R)
+	5.	MFLO - 000000 00000 00000 ddddd 00000 010010 DONE(R)
 	6.	MULT - 000000 sssss ttttt 00000 00000 011000
 	7.	NOR  - 
 	8.	OR   - 000000 sssss ttttt ddddd 00000 100101
 	9.	SLL  - 000000 sssss ttttt ddddd hhhhh 000000 DONE(dan)
 	10.	SLLV - 000000 sssss ttttt ddddd ----- 000100 DONE(dan)
-	11.	SLT  - 000000 sssss ttttt ddddd 00000 101010
+	11.	SLT  - 000000 sssss ttttt ddddd 00000 101010 DONE(R)
 	12.	SRA  - 000000 ----- ttttt ddddd hhhhh 000011 DONE(dan)
 	13.	SRAV - 
 	14.	SRL  - 000000 ----- ttttt ddddd hhhhh 000010 DONE(dan)
@@ -17,11 +17,11 @@ TIPO R
 	16.	SUB  - 000000 sssss ttttt ddddd 00000 100010 DONE(dan)
 	17.	SUBU - 000000 sssss ttttt ddddd 00000 100011 
 	18.	XOR  - 000000 sssss ttttt ddddd ----- 100110
-	19.	MULTU- 000000 sssss ttttt 00000 00000 011001
-	20.	DIV  - 000000 sssss ttttt 00000 00000 011010
-	21.	DIVU - 000000 sssss ttttt 00000 00000 011011
-	22.	JR   - 000000 sssss 00000 00000 00000 001000
-	23.   SYSCALL- 000000 ----- ----- ----- ----- 001100
+	19.	MULTU- 000000 sssss ttttt 00000 00000 011001 DONE(R)
+	20.	DIV  - 000000 sssss ttttt 00000 00000 011010 DONE(R)
+	21.	DIVU - 000000 sssss ttttt 00000 00000 011011 DONE(R)
+	22.	JR   - 000000 sssss 00000 00000 00000 001000 DONE(R)
+	23.   SYSCALL- 000000 ----- ----- ----- ----- 001100 DONE(R)
 
 
 TIPO I
