@@ -56,14 +56,23 @@ public class DecoderBinAsse {
 	
 	public String convertBin(String bin){
 		String result="";
+		int BinarioDecimal = Integer.parseInt(bin, 2);
+		result = "$"+BinarioDecimal;
 		
-		switch(bin){
-		case"01000":result ="$8";
-			break;
-		case"10000":result ="$16";
-			break;
-		case"10001":result ="$17";
-		}
+		//switch(bin){
+		//case"00000":result ="$0";
+		//	break;
+		//case"00001":result ="$1";
+		//	break;
+		//case"00010":result="$2";
+		//	break:
+		//case"00"
+		//case"01000":result ="$8";
+		//	break;
+		//case"10000":result ="$16";
+		//	break;
+		//case"10001":result ="$17";
+		//}
 		
 		return result;
 	}

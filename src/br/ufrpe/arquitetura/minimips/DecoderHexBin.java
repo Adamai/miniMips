@@ -8,7 +8,7 @@ public class DecoderHexBin {
 
 	public String convert(String entrada) {
 		String saida = "";
-		for (int i = 0; i < 8; i++) {
+		for (int i = 2; i < 10; i++) {
 			char x = entrada.charAt(i);
 			switch (x) {
 			case '0':
