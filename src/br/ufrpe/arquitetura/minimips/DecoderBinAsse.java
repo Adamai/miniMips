@@ -27,10 +27,20 @@ public class DecoderBinAsse {
 		switch(op){
 		case"000000": resultOP = "sll";
 			break;
+		case"000010": resultOP="srl";
+			break;
+		case"000011": resultOP="sra";
+			break;
+		case"000100": resultOP="sllv";
+			break;
+		case"000110": resultOP="srlv";
+			break;
 		case"100000":resultOP = "add";
 			break;
 		case"100010":resultOP="sub";
 			break;
+		
+		
 		}
 		}
 		else if(tipo.equals("I")){ //INSTRUÇOES TIPO I
@@ -79,8 +89,17 @@ public class DecoderBinAsse {
 				   break;
 				case"sub": result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3; 
 				   break;
-				case"sll":result = "$"+r1 + ", "+ "$"+ r2 + ", "+ r4;
+				case"sll":result = "$"+r1 + ", "+ "$"+ r3 + ", "+ r4;
 					break;
+				case"srl":result = "$"+r1 + ", "+ "$"+ r3 + ", "+ r4;
+					break;
+				case"sra":result = "$"+r1 + ", "+ "$"+ r3 + ", "+ r4;
+					break;
+				case"sllv":result = "$"+r1 + ", "+ "$"+ r3 + ", "+ "$"+r2; 
+					break;
+				case"srlv":result = "$"+r1 + ", "+ "$"+ r3 + ", "+ "$"+r2; 
+					break;
+				
 	
 			}
 		}
