@@ -8,7 +8,7 @@ public class DecoderBinAsse {
 	
 	public String convert2(String entrada){
 		String op = entrada.substring(26, 32);
-		String inst= entrada.substring(0, 5);
+		String inst= entrada.substring(0, 6);
 		
 		String tipo = verifInst(inst);
 		String opverif = verifop(op,tipo);
