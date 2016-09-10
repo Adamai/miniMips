@@ -29,6 +29,8 @@ public class DecoderBinAsse {
 			break;
 		case"100000":resultOP = "add";
 			break;
+		case"100010":resultOP="sub";
+			break;
 		}
 		}
 		else if(tipo.equals("I")){ //INSTRUÇOES TIPO I
@@ -74,6 +76,8 @@ public class DecoderBinAsse {
 			   result = r1 + ", "+ r2 + ", "+r3;
 			switch(op){
 				case"add": result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3; 
+				   break;
+				case"sub": result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3; 
 				   break;
 				case"sll":result = "$"+r1 + ", "+ "$"+ r2 + ", "+ r4;
 					break;
