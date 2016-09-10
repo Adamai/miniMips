@@ -50,33 +50,32 @@ public class DecoderHexBin {
 				saida += "1001";
 
 				break;
-			case 'A':
+			case 'a':
 				saida += "1010";
 
 				break;
-			case 'B':
+			case 'b':
 				saida += "1011";
 
 				break;
-			case 'C':
+			case 'c':
 				saida += "1100";
 
 				break;
-			case 'D':
+			case 'd':
 				saida += "1101";
 
 				break;
-			case 'E':
+			case 'e':
 				saida += "1110";
 
 				break;
-			case 'F':
+			case 'f':
 				saida += "1111";
 
 				break;
 			}
 		}
-
 		return saida;
 	}
 

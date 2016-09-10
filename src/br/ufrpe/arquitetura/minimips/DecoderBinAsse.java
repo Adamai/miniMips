@@ -12,7 +12,7 @@ public class DecoderBinAsse {
 		
 		String tipo = verifInst(inst);
 		String opverif = verifop(op,tipo);
-		String regverif = verifReg(entrada, opverif);
+		String regverif = verifReg(entrada, opverif,tipo);
 		
 		String resultado="";
 		resultado = opverif + " " +regverif;
@@ -25,7 +25,8 @@ public class DecoderBinAsse {
 		
 		if(tipo.equals("R")){ //INTRUÇOES TIPO R
 		switch(op){
-		
+		case"000000": resultOP = "sll";
+			break;
 		case"100000":resultOP = "add";
 			break;
 		}
@@ -58,22 +59,27 @@ public class DecoderBinAsse {
 			return instVerif;
 	}
 	
-	public String verifReg(String entrada, String op){ // CODIFICA OS REGISTRADORES
+	public String verifReg(String entrada, String op, String tipo){ // CODIFICA OS REGISTRADORES
 		String r1= "";//dest
 		String r2= "";//op1
 		String r3= "";//op2
+		String r4= "";
 		String result="";
 		
-		switch(op){
-		case"add": {
-				   r1= convertBin(entrada.substring(16, 21));
-				   r2= convertBin(entrada.substring(6, 11));
-				   r3= convertBin(entrada.substring(11, 16));
-				   result = r1 + ", "+ r2 + ", "+r3;
-				   }
+		if(tipo.equals("R")){
+			   r1= convertBin(entrada.substring(16, 21));
+			   r2= convertBin(entrada.substring(6, 11));
+			   r3= convertBin(entrada.substring(11, 16));
+			   r4= convertBin(entrada.substring(21,26));
+			   result = r1 + ", "+ r2 + ", "+r3;
+			switch(op){
+				case"add": result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3; 
 				   break;
+				case"sll":result = "$"+r1 + ", "+ "$"+ r2 + ", "+ r4;
+					break;
+	
+			}
 		}
-		
 		
 		return result;
 	}
@@ -82,22 +88,8 @@ public class DecoderBinAsse {
 	public String convertBin(String bin){
 		String result="";
 		int BinarioDecimal = Integer.parseInt(bin, 2);
-		result = "$"+BinarioDecimal;
 		
-		//switch(bin){
-		//case"00000":result ="$0";
-		//	break;
-		//case"00001":result ="$1";
-		//	break;
-		//case"00010":result="$2";
-		//	break:
-		//case"00"
-		//case"01000":result ="$8";
-		//	break;
-		//case"10000":result ="$16";
-		//	break;
-		//case"10001":result ="$17";
-		//}
+		result = Integer.toString(BinarioDecimal);
 		
 		return result;
 	}
