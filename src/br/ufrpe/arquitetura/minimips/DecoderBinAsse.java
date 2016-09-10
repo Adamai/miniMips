@@ -189,10 +189,47 @@ private String imediato;
 	
 	public String convertBin(String bin){
 		String result="";
+		if(bin.charAt(0)=='1'){
+			String resultado = "-";
+			int k = 1;
+			String lakon = "";
+			int i = bin.length()-1;
+			for( ; i>=0 && k == 1 ; i--){
+				if(bin.charAt(i)=='1')
+					k=0;
+			}
+			for(int j = 0; j<=i && k==0; j++){
+				if(bin.charAt(j)=='0')
+					lakon += "1";
+				else if(bin.charAt(j)=='1')
+					lakon += "0";
+			}
+			int BinarioDecimal = Integer.parseInt(lakon, 2);
+			result = Integer.toString(BinarioDecimal);
+			resultado += lakon;
+			return resultado;
+		} else{
 		int BinarioDecimal = Integer.parseInt(bin, 2);
-		
 		result = Integer.toString(BinarioDecimal);
-		
 		return result;
+		}
 	}
+	
+/*	public String negbincompl(String bin){
+		int k = 1;
+		String lakon = "";
+		int i = bin.length()-1;
+		for( ; i>=0 && k == 1 ; i--){
+			if(bin.charAt(i)=='1')
+				k=0;
+		}
+		for(int j = 0; j<=i && k==0; j++){
+			if(bin.charAt(j)=='0')
+				lakon += "1";
+			else if(bin.charAt(j)=='1')
+				lakon += "0";
+		}
+		return lakon;
+	}*/
+	
 }
