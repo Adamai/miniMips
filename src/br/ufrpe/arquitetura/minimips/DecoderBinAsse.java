@@ -55,6 +55,18 @@ public class DecoderBinAsse {
 			break;
 		case"010000":resultOP="mfhi";
 			break;
+		case"100101":resultOP="or";
+		   break;
+		  case"100110":resultOP="xor";
+		   break;
+		  case"100111":resultOP="nor";
+		   break;
+		  case"100001":resultOP="addu";
+		   break;
+		  case"100011":resultOP="subu";
+		   break;
+		  case"011000":resultOP="mult";
+		   break;
 		}
 		}
 		else if(tipo.equals("I")){ //INSTRUÇOES TIPO I
@@ -128,7 +140,21 @@ public class DecoderBinAsse {
 				case"mflo":result= "$"+r1;
 					break;
 				case"mfhi":result= "$"+r1;
-				
+					break;
+				case"and":result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3;
+			     break;
+			    case"or":result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3;
+			     break;
+			    case"xor":result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3;
+			     break;
+			    case"nor":result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3;
+			     break;
+			    case"addu":result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3;
+			     break;
+			    case"subu":result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3;
+			     break;
+			    case"mult":result = "$"+r2 + ", "+ "$"+ r3;
+			     break;
 				
 	
 			}
