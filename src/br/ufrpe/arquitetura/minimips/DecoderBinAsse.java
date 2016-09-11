@@ -91,6 +91,18 @@ private String imediato;
 				break;
 			case"001000": resultOP="addi";
 				break;
+			case"001010": resultOP="slti";
+				break;
+			case"101011": resultOP= "sw";
+				break;
+			case"100011": resultOP = "lw";
+				break;
+			case"000101": resultOP = "bne";
+				break;
+			case"000001": resultOP = "bltz";
+				break;
+			case"000100":resultOP = "beq";
+				break;
 			}
 		}
 		else{       // INTRUÇOES TIPO J
@@ -173,6 +185,19 @@ private String imediato;
 				break;
 			case"addi":result = "$"+ r3 + ", " + "$"+ r2 + ", " + convertBin(imediato);
 				break;
+			case"slti":result = "$"+ r3 + ", $"+r2 + ", "+ convertBin(imediato);
+				break;
+			case"sw":result = "$"+ r3 + ", "+convertBin(imediato)+"($"+r2+")";
+				break;
+			case"lw":result = "$"+ r3 + ", "+convertBin(imediato)+"($"+r2+")";
+				break;
+			case"bne":result = "$"+r2+", $"+r3+", start";
+				break;
+			case"bltz":result = "$"+r2+", start";
+				break;
+			case"beq":result = "$"+r2+", $"+r3+", start";
+				break;
+			
 		}
 		
 			
