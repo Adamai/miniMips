@@ -103,12 +103,27 @@ private String imediato;
 				break;
 			case"000100":resultOP = "beq";
 				break;
+			case"001110": resultOP="xori";
+				break;
+			case"001101": resultOP="ori";
+				break;
+			case"001100": resultOP="andi";
+				break;
+			case"001001": resultOP="addiu";
+				break;
+			case"100000": resultOP="lb";
+				break;
+			case"101000": resultOP="sb";
+				break;
 			}
 		}
 		else{       // INTRUÇOES TIPO J
 			imediato = entrada.substring(6,32);
 			switch(inst){
-			
+			case"000010": resultOP="j";
+				break;
+			case"000011": resultOP="jal";
+				break;
 			}
 		}
 	}
@@ -196,6 +211,14 @@ private String imediato;
 			case"bltz":result = "$"+r2+", start";
 				break;
 			case"beq":result = "$"+r2+", $"+r3+", start";
+				break;
+			case"xori":result = "$" + r3 + ", " + "$"+ r2+ ", "+ convertBin(imediato);
+				break;
+			case "ori":result = "$" + r3 + ", " + "$"+ r2+ ", "+ convertBin(imediato);
+				break;
+			case "andi":result = "$" + r3 + ", " + "$" + r2+ ", "+ convertBin(imediato);
+				break;
+			case "addiu":result = "$" + r3 + ", " + "$" + r2+ ", "+ convertBin(imediato);
 				break;
 			
 		}
