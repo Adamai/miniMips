@@ -27,10 +27,10 @@ TIPO R
 TIPO I
 	1.	XORI - 001110 sssss ttttt iiiiiiiiiiiiiiii
 	2.	ORI  - 001101 sssss ttttt iiiiiiiiiiiiiiii
-	3.	LUI  - 001111 ----- ttttt iiiiiiiiiiiiiiii
+	3.	LUI  - 001111 ----- ttttt iiiiiiiiiiiiiiii DONE(dan)
 	4.	ANDI - 001100 sssss ttttt iiiiiiiiiiiiiiii
 	5.	ADDIU- 001001 sssss ttttt iiiiiiiiiiiiiiii
-	6.	ADDI - 001000 sssss ttttt iiiiiiiiiiiiiiii
+	6.	ADDI - 001000 sssss ttttt iiiiiiiiiiiiiiii DONE(dan)
 	7.	BEQ  - 000100 sssss ttttt iiiiiiiiiiiiiiii
 	8.	BLTZ - 000001 sssss 00000 iiiiiiiiiiiiiiii
 	9.	BNE  - 000101 sssss ttttt iiiiiiiiiiiiiiii
