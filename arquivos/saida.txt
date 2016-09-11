@@ -6,3 +6,9 @@ sllv $1, $2, $3
 srlv $1, $2, $3
 lui $1, 100
 addi $1, $2, 100
+slti $1, $2, 100
+bltz $1, start
+beq $1, $2, start
+lw $1, 100($2)
+sw $1, 100($2)
+bne $1, $2, start

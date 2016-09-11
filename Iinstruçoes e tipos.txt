@@ -31,12 +31,12 @@ TIPO I
 	4.	ANDI - 001100 sssss ttttt iiiiiiiiiiiiiiii
 	5.	ADDIU- 001001 sssss ttttt iiiiiiiiiiiiiiii
 	6.	ADDI - 001000 sssss ttttt iiiiiiiiiiiiiiii DONE(dan)
-	7.	BEQ  - 000100 sssss ttttt iiiiiiiiiiiiiiii
-	8.	BLTZ - 000001 sssss 00000 iiiiiiiiiiiiiiii
-	9.	BNE  - 000101 sssss ttttt iiiiiiiiiiiiiiii
-	10.	LW   - 100011 sssss ttttt iiiiiiiiiiiiiiii
-	11.	SW   - 101011 sssss ttttt iiiiiiiiiiiiiiii
-	12.	SLTI - 001010 sssss ttttt iiiiiiiiiiiiiiii
+	7.	BEQ  - 000100 sssss ttttt iiiiiiiiiiiiiiii DONE(R)
+	8.	BLTZ - 000001 sssss 00000 iiiiiiiiiiiiiiii DONE(R)
+	9.	BNE  - 000101 sssss ttttt iiiiiiiiiiiiiiii DONE(R)
+	10.	LW   - 100011 sssss ttttt iiiiiiiiiiiiiiii DONE(R)
+	11.	SW   - 101011 sssss ttttt iiiiiiiiiiiiiiii DONE(R)
+	12.	SLTI - 001010 sssss ttttt iiiiiiiiiiiiiiii DONE(R)
 	13. 	LB   - 100000 sssss ttttt iiiiiiiiiiiiiiii
 	14. 	LBU  - 
 	15. 	SB   - 101000 sssss ttttt iiiiiiiiiiiiiiii
