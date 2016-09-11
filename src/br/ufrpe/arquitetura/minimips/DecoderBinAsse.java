@@ -31,8 +31,9 @@ private String imediato;
 		else if(inst.equals("000010")||inst.equals("000011")){
 			this.tipo = "J"; // this.tipo = "J"
 		}
-		else
+		else{
 			this.tipo= "I";  //this.tipo = "I"
+			}
 		
 		if(this.tipo.equals("R")){    //INTRUÇOES TIPO R
 			String aux = entrada.substring(26, 32);
@@ -86,7 +87,10 @@ private String imediato;
 		else if(tipo.equals("I")){ //INSTRUÇOES TIPO I
 			imediato = entrada.substring(21,32);
 			switch(inst){
-			
+			case"001111": resultOP = "lui";
+				break;
+			case"001000": resultOP="addi";
+				break;
 			}
 		}
 		else{       // INTRUÇOES TIPO J
@@ -95,23 +99,7 @@ private String imediato;
 			
 			}
 		}
-		//return resultOP;
 	}
-	
-	//public String verifInst(String inst){ // VERIFICA O TIPO DE INSTRUÇÃO
-	//	String instVerif = "";
-	//	
-	//	if(inst.equals("000000")){
-	//		instVerif = "R";
-	//		}
-	//		else if (inst.equals("000010")||inst.equals("000011")){
-	//			instVerif = "J";
-	//		}
-	//		else
-	//			instVerif = "I";
-	//	
-	//		return instVerif;
-	//}
 	
 	public String verifReg(String entrada){ // CODIFICA OS REGISTRADORES
 		
@@ -177,6 +165,16 @@ private String imediato;
 			}
 		}
 		if(this.tipo.equals("I")){
+		
+			 r2= convertBin(entrada.substring(6, 11)); //operador-> 2ªseq
+			 r3= convertBin(entrada.substring(11, 16)); //operador-> 3ªseq
+			switch(resultOP){
+			case"lui":result = "$"+ r3 + ", " + convertBin(imediato);
+				break;
+			case"addi":result = "$"+ r3 + ", " + "$"+ r2 + ", " + convertBin(imediato);
+				break;
+		}
+		
 			
 		}
 		if(this.tipo.equals("J")){
