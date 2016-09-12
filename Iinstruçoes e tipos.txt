@@ -5,13 +5,13 @@ TIPO R
 	4.	MFHI - 000000 00000 00000 ddddd 00000 010000 DONE(R)
 	5.	MFLO - 000000 00000 00000 ddddd 00000 010010 DONE(R)
 	6.	MULT - 000000 sssss ttttt 00000 00000 011000 DONE(T)
-	7.	NOR  - 
+	7.	NOR  - 000000 sssss ttttt ddddd 00000 100111 DONE 
 	8.	OR   - 000000 sssss ttttt ddddd 00000 100101 DONE(T)
 	9.	SLL  - 000000 sssss ttttt ddddd hhhhh 000000 DONE(dan)
 	10.	SLLV - 000000 sssss ttttt ddddd ----- 000100 DONE(dan)
 	11.	SLT  - 000000 sssss ttttt ddddd 00000 101010 DONE(R)
 	12.	SRA  - 000000 ----- ttttt ddddd hhhhh 000011 DONE(dan)
-	13.	SRAV - 
+	13.	SRAV - 000000 sssss ttttt ddddd 00000 000111 DONE(dan)
 	14.	SRL  - 000000 ----- ttttt ddddd hhhhh 000010 DONE(dan)
 	15.	SRLV - 000000 sssss ttttt ddddd 00000 000110 DONE(dan)
 	16.	SUB  - 000000 sssss ttttt ddddd 00000 100010 DONE(dan)
@@ -25,7 +25,7 @@ TIPO R
 
 
 TIPO I
-	1.	XORI - 001110 sssss ttttt iiiiiiiiiiiiiiiiDONE(david)
+	1.	XORI - 001110 sssss ttttt iiiiiiiiiiiiiiii DONE(david)
 	2.	ORI  - 001101 sssss ttttt iiiiiiiiiiiiiiii DONE(david)
 	3.	LUI  - 001111 ----- ttttt iiiiiiiiiiiiiiii DONE(dan)
 	4.	ANDI - 001100 sssss ttttt iiiiiiiiiiiiiiii DONE(david)
@@ -37,9 +37,9 @@ TIPO I
 	10.	LW   - 100011 sssss ttttt iiiiiiiiiiiiiiii DONE(R)(david)
 	11.	SW   - 101011 sssss ttttt iiiiiiiiiiiiiiii DONE(R)(david)
 	12.	SLTI - 001010 sssss ttttt iiiiiiiiiiiiiiii DONE(R)(david)
-	13. 	LB   - 100000 sssss ttttt iiiiiiiiiiiiiiii HALF-DONE(david)
-	14. 	LBU  - 
-	15. 	SB   - 101000 sssss ttttt iiiiiiiiiiiiiiii HALF-DONE(david)
+	13. 	LB   - 100000 sssss ttttt iiiiiiiiiiiiiiii DONE(david)(dan)
+	14. 	LBU  - 100100 sssss ttttt iiiiiiiiiiiiiiii DONE(dan)
+	15. 	SB   - 101000 sssss ttttt iiiiiiiiiiiiiiii DONE(david)(dan)
 
 TIPO J
 	1.J  - 000010 iiiiiiiiiiiiiiiiiiiiiiiiii
