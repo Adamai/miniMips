@@ -6,9 +6,9 @@ public class TesteApp {
 	public static void main(String[] args){
 		try{
 		
-		FileReader entrada = new FileReader("miniMips/arquivos/entrada.txt");
+		FileReader entrada = new FileReader("arquivos/entrada.txt");
 		BufferedReader ler = new BufferedReader(entrada);
-		FileWriter saida = new FileWriter("miniMips/arquivos/saida.txt");
+		FileWriter saida = new FileWriter("arquivos/saida.txt");
 		BufferedWriter escrever = new BufferedWriter(saida);
 		DecoderHexBin dec1 = new DecoderHexBin();
 		DecoderBinAsse dec2 = new DecoderBinAsse();
