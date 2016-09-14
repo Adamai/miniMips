@@ -82,6 +82,8 @@ private String imediato;
 		   break;
 		case"100100":resultOP="and";
 			break;
+		case"000111": resultOP ="srav";
+		break;
 		}
 		}
 		else if(tipo.equals("I")){ //INSTRUÇOES TIPO I
@@ -115,6 +117,9 @@ private String imediato;
 				break;
 			case"101000": resultOP="sb";
 				break;
+			case"100100": resultOP ="lbu";
+				break;
+			
 			}
 		}
 		else{       // INTRUÇOES TIPO J
@@ -187,6 +192,8 @@ private String imediato;
 			     	break;
 			    case"mult":result = "$"+r2 + ", "+ "$"+ r3;
 			     	break;
+			    case"srav":result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3;
+			    	break;
 				
 	
 			}
@@ -206,11 +213,11 @@ private String imediato;
 				break;
 			case"lw":result = "$"+ r3 + ", "+convertBin(imediato)+"($"+r2+")";
 				break;
-			case"bne":result = "$"+r2+", $"+r3+", start";
+			case"bne":result = "$"+r2+", $"+r3+ ", "+ convertBin(imediato);
 				break;
-			case"bltz":result = "$"+r2+", start";
+			case"bltz":result = "$"+r2+ ", "+ convertBin(imediato);
 				break;
-			case"beq":result = "$"+r2+", $"+r3+", start";
+			case"beq":result = "$"+r2+", $"+r3 +", " + convertBin(imediato);
 				break;
 			case"xori":result = "$" + r3 + ", " + "$"+ r2+ ", "+ convertBin(imediato);
 				break;
@@ -220,6 +227,11 @@ private String imediato;
 				break;
 			case "addiu":result = "$" + r3 + ", " + "$" + r2+ ", "+ convertBin(imediato);
 				break;
+			case"lbu": result = "$"+ r3 + ", "+convertBin(imediato)+"($"+r2+")";
+				break;
+			case"lb": result = "$"+ r3 + ", "+convertBin(imediato)+"($"+r2+")";
+				break;
+			case"sb": result = "$"+ r3 + ", "+convertBin(imediato)+"($"+r2+")";
 			
 		}
 		
@@ -227,6 +239,12 @@ private String imediato;
 		}
 		if(this.tipo.equals("J")){
 			
+		switch(resultOP){	
+			case"j":result =  ", "+ convertBin(imediato);
+				break;
+			case"jal":result =  ", "+ convertBin(imediato);
+				break;
+		}
 		}
 		
 		return result;
