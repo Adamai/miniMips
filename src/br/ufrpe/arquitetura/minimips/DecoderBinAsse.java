@@ -10,6 +10,19 @@ private String imediato;
 		
 	}
 	
+	public Boolean verify(String entrada){
+		if(entrada.charAt(0)=='0' && entrada.charAt(1) == 'x' && entrada.length() == 10){
+			String hex = entrada.substring(2);
+			int k = 0;
+			for(int i=0;i<8;i++){
+				if(47 < hex.charAt(i) && hex.charAt(i)< 58 || 96 < hex.charAt(i) && hex.charAt(i) < 103)
+					k++;	
+			} 
+			if(k==8) return true;
+			else return false;
+		} else return false;
+	}
+	
 	public String convert2(String entrada){
 
 		 verifop(entrada);
@@ -240,9 +253,9 @@ private String imediato;
 		if(this.tipo.equals("J")){
 			
 		switch(resultOP){	
-			case"j":result =  ", "+ convertBin(imediato);
+			case"j":result =  ", "+ convertPositv(imediato);
 				break;
-			case"jal":result =  ", "+ convertBin(imediato);
+			case"jal":result =  ", "+ convertPositv(imediato);
 				break;
 		}
 		}
@@ -280,6 +293,13 @@ private String imediato;
 		result = Integer.toString(BinarioDecimal);
 		return result;
 		}
+	}
+	
+	public String convertPositv(String bin){
+		String result = "";
+		int BinarioDecimal = Integer.parseInt(bin, 2);
+		result = Integer.toString(BinarioDecimal);
+		return result;
 	}
 	
 	
