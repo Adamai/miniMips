@@ -5,6 +5,22 @@ public class DecoderHexBin {
 	public DecoderHexBin() {
 
 	}
+	
+	public Boolean verify(String entrada){
+		if(entrada != null && entrada.length() == 10){
+			if(entrada.charAt(0)=='0' && entrada.charAt(1) == 'x'){
+			String hex = entrada.substring(2);
+			int k = 0;
+			for(int i=0;i<8;i++){
+				if(47 < hex.charAt(i) && hex.charAt(i)< 58 || 96 < hex.charAt(i) && hex.charAt(i) < 103)
+					k++;	
+			} 
+			if(k==8) return true;
+			else return false;}
+			else return false;
+		} else return false;
+	}
+	
 
 	public String convert(String entrada) {
 		String saida = "";

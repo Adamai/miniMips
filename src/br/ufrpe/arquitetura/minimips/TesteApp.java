@@ -17,8 +17,13 @@ public class TesteApp {
 		
 		String linhaEntrada = ler.readLine();
 		while(linhaEntrada!=null){
+			String result = "";
+			if(dec1.verify(linhaEntrada)){
 			String binario = dec1.convert(linhaEntrada);
-			String result = dec2.convert2(binario);
+			result = dec2.convert2(binario);
+			}
+			if(dec1.verify(linhaEntrada)==false)
+				result = "Operacao nao identificada";
 			escrever.append(result);
 			escrever.newLine();
 			linhaEntrada = ler.readLine();
