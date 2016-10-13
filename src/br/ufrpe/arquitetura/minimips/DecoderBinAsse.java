@@ -88,7 +88,7 @@ private ULA ula = new ULA();
 		}
 		}
 		else if(tipo.equals("I")){ //INSTRUÇOES TIPO I
-			imediato = entrada.substring(21,32);
+			imediato = entrada.substring(16,32);
 			switch(inst){
 			case"001111": resultOP = "lui";
 				break;
@@ -150,7 +150,7 @@ private ULA ula = new ULA();
 			   result = r1 + ", "+ r2 + ", "+r3;
 			switch(resultOP){
 				case"add": result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3+'\n';
-						   ula.aritmetica("add",Integer.parseInt(r2), Integer.parseInt(r3), Integer.parseInt(r1), 0);
+						   ula.aritmetica("add",Integer.parseInt(r2), Integer.parseInt(r3), Integer.parseInt(r1), "");
 						   result+= ula.resultado();
 				   break;
 				case"sub": result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3; 
@@ -205,10 +205,14 @@ private ULA ula = new ULA();
 		
 			 r2= convertBin(entrada.substring(6, 11)); //operador-> 2ªseq
 			 r3= convertBin(entrada.substring(11, 16)); //operador-> 3ªseq
+			  
+			 
 			switch(resultOP){
 			case"lui":result = "$"+ r3 + ", " + convertBin(imediato);
 				break;
 			case"addi":result = "$"+ r3 + ", " + "$"+ r2 + ", " + convertBin(imediato);
+					   ula.aritmetica("addi", Integer.parseInt(r2), 0 , Integer.parseInt(r3),"0000000000000000"+ imediato);
+					   result = result + ula.resultado();
 				break;
 			case"slti":result = "$"+ r3 + ", $"+r2 + ", "+ convertBin(imediato);
 				break;

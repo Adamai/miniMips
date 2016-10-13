@@ -20,11 +20,13 @@ public class ULA {
 		return s;
 	}
 	
-	public String aritmetica(String op, int op1,int op2, int result, int imediato){
+	public String aritmetica(String op, int op1,int op2, int result, String imediato){
 		
 		switch(op){
 			
 		case"add" : registradores.setRegistrador(result,somador(registradores.getRegistrador(op1),registradores.getRegistrador(op2),op));
+			break;
+		case"addi": registradores.setRegistrador(result, somador(registradores.getRegistrador(op1),imediato,op));
 			break;
 			
 		
@@ -37,7 +39,7 @@ public class ULA {
 		String result ="";
 		String carry = "0";
 		
-		if(inst == "add"){
+		if(inst == "add"||inst =="addi"){
 			for(int i = 31;i>=0;i--){
 				if(op1.charAt(i)=='0' && op2.charAt(i)=='0'&&carry=="0"){ // 0+0+0
 					result= "0"+result;
