@@ -20,7 +20,7 @@ private String imediato;
 		return resultado;
 	}
 	
-	public void verifop(String entrada){ // VERIFICA A OPERAÇÃO 
+	public void verifop(String entrada){ // VERIFICA A OPERAÃ‡ÃƒO 
 		
 		String inst = entrada.substring(0, 6);
 		
@@ -35,7 +35,7 @@ private String imediato;
 			this.tipo= "I";  //this.tipo = "I"
 			}
 		
-		if(this.tipo.equals("R")){    //INTRUÇOES TIPO R
+		if(this.tipo.equals("R")){    //INTRUÃ‡OES TIPO R
 			String aux = entrada.substring(26, 32);
 		switch(aux){
 		case"000000": resultOP = "sll";
@@ -86,8 +86,8 @@ private String imediato;
 		break;
 		}
 		}
-		else if(tipo.equals("I")){ //INSTRUÇOES TIPO I
-			imediato = entrada.substring(21,32);
+		else if(tipo.equals("I")){ //INSTRUÃ‡OES TIPO I
+			imediato = entrada.substring(16,32);
 			switch(inst){
 			case"001111": resultOP = "lui";
 				break;
@@ -122,7 +122,7 @@ private String imediato;
 			
 			}
 		}
-		else{       // INTRUÇOES TIPO J
+		else{       // INTRUÃ‡OES TIPO J
 			imediato = entrada.substring(6,32);
 			switch(inst){
 			case"000010": resultOP="j";
@@ -142,10 +142,10 @@ private String imediato;
 		String result="";
 		
 		if(this.tipo.equals("R")){
-			   r1= convertBin(entrada.substring(16, 21)); //resposta-> 4ªseq
-			   r2= convertBin(entrada.substring(6, 11)); //operador-> 2ªseq
-			   r3= convertBin(entrada.substring(11, 16)); //operador-> 3ªseq
-			   r4= convertBin(entrada.substring(21,26)); //operador especial-> 5ªseq
+			   r1= convertBin(entrada.substring(16, 21)); //resposta-> 4Âªseq
+			   r2= convertBin(entrada.substring(6, 11)); //operador-> 2Âªseq
+			   r3= convertBin(entrada.substring(11, 16)); //operador-> 3Âªseq
+			   r4= convertBin(entrada.substring(21,26)); //operador especial-> 5Âªseq
 			   result = r1 + ", "+ r2 + ", "+r3;
 			switch(resultOP){
 				case"add": result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3; 
@@ -200,8 +200,8 @@ private String imediato;
 		}
 		if(this.tipo.equals("I")){
 		
-			 r2= convertBin(entrada.substring(6, 11)); //operador-> 2ªseq
-			 r3= convertBin(entrada.substring(11, 16)); //operador-> 3ªseq
+			 r2= convertBin(entrada.substring(6, 11)); //operador-> 2Âªseq
+			 r3= convertBin(entrada.substring(11, 16)); //operador-> 3Âªseq
 			switch(resultOP){
 			case"lui":result = "$"+ r3 + ", " + convertBin(imediato);
 				break;
