@@ -5,18 +5,16 @@ public class DecoderBinAsse {
 private String tipo;
 private String resultOP;
 private String imediato;
+private int[] registradores = new int[4]; 
 
-private ULA ula = new ULA();
-	public DecoderBinAsse(){
-		
-	}
 
-	public String convert2(String entrada){
+	public StringBuffer convert2(String entrada){
 
 		 verifop(entrada);
-		String registradores = verifReg(entrada);
+		StringBuffer registradores = verifReg(entrada);
 
-		String resultado =this.resultOP + " " + registradores;
+		StringBuffer resultado= new StringBuffer();
+				resultado.append(this.resultOP + " " + registradores);
 
 		return resultado;
 	}
@@ -134,68 +132,70 @@ private ULA ula = new ULA();
 		}
 	}
 	
-	public String verifReg(String entrada){ // DECODIFICA OS REGISTRADORES
+	public StringBuffer verifReg(String entrada){ // DECODIFICA OS REGISTRADORES
 		
 		String r1= "";//dest
 		String r2= "";//op1
 		String r3= "";//op2
 		String r4= "";
-		String result="";
+		StringBuffer result= new StringBuffer();
 		
 		if(this.tipo.equals("R")){
 			   r1= convertBin(entrada.substring(16, 21)); //resposta-> 4ªseq
 			   r2= convertBin(entrada.substring(6, 11)); //operador-> 2ªseq
 			   r3= convertBin(entrada.substring(11, 16)); //operador-> 3ªseq
 			   r4= convertBin(entrada.substring(21,26)); //operador especial-> 5ªseq
-			   result = r1 + ", "+ r2 + ", "+r3;
+			  // result.append(r1 + ", "+ r2 + ", "+r3);
 			switch(resultOP){
-				case"add": result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3+'\n';
-						   ula.aritmetica("add",Integer.parseInt(r2), Integer.parseInt(r3), Integer.parseInt(r1), "");
-						   result+= ula.resultado();
+				case"add": result.append("$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3+'\n');
+						registradores[0] = Integer.parseInt(r1); registradores[1] = Integer.parseInt(r2); registradores[2] = Integer.parseInt(r3); registradores[3] = Integer.parseInt(r3);  
 				   break;
-				case"sub": result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3; 
+				case"sub": result.append("$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3);
+						registradores[0] = Integer.parseInt(r1); registradores[1] = Integer.parseInt(r2); registradores[2] = Integer.parseInt(r3); registradores[3] = Integer.parseInt(r3);
 				   break;
-				case"sll":result = "$"+r1 + ", "+ "$"+ r3 + ", "+ r4;
+				case"sll":result.append("$"+r1 + ", "+ "$"+ r3 + ", "+ r4);
 					break;
-				case"srl":result = "$"+r1 + ", "+ "$"+ r3 + ", "+ r4;
+				case"srl":result.append("$"+r1 + ", "+ "$"+ r3 + ", "+ r4);
 					break;
-				case"sra":result = "$"+r1 + ", "+ "$"+ r3 + ", "+ r4;
+				case"sra":result.append("$"+r1 + ", "+ "$"+ r3 + ", "+ r4);
 					break;
-				case"sllv":result = "$"+r1 + ", "+ "$"+ r3 + ", "+ "$"+r2; 
+				case"sllv":result.append("$"+r1 + ", "+ "$"+ r3 + ", "+ "$"+r2); 
 					break;
-				case"srlv":result = "$"+r1 + ", "+ "$"+ r3 + ", "+ "$"+r2; 
+				case"srlv":result.append("$"+r1 + ", "+ "$"+ r3 + ", "+ "$"+r2); 
 					break;
-				case"syscall":result = "";
+				case"syscall":result.append("");
 					break;
-				case"jr":result = "$"+r2;
+				case"jr":result.append("$"+r2);
 					break;
-				case"divu":result = "$"+r2 +", "+ "$"+r3;
+				case"divu":result.append("$"+r2 +", "+ "$"+r3);
 					break;
-				case"div":result = "$"+r2+", "+"$"+r3;
+				case"div":result.append("$"+r2+", "+"$"+r3);
 					break;
-				case"multu":result = "$"+r2+", $"+r3;
+				case"multu":result.append("$"+r2+", $"+r3);
 					break;
-				case"slt":result = "$"+r1+", $"+r2+", $"+r3;
+				case"slt":result.append("$"+r1+", $"+r2+", $"+r3);
 					break;
-				case"mflo":result= "$"+r1;
+				case"mflo":result.append("$"+r1);
 					break;
-				case"mfhi":result= "$"+r1;
+				case"mfhi":result.append("$"+r1);
 					break;
-				case"and":result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3;
+				case"and":result.append("$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3);
 			     	break;
-			    case"or":result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3;
+			    case"or":result.append("$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3);
 			     	break;
-			    case"xor":result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3;
+			    case"xor":result.append("$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3);
 			     	break;
-			    case"nor":result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3;
+			    case"nor":result.append("$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3);
 			     	break;
-			    case"addu":result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3;
+			    case"addu":result.append("$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3);
 			     	break;
-			    case"subu":result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3;
+			    case"subu":result.append("$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3);
+			    		   registradores[0] = Integer.parseInt(r1); registradores[1] = Integer.parseInt(r2); registradores[2] = Integer.parseInt(r3); registradores[3] = Integer.parseInt(r3);
 			     	break;
-			    case"mult":result = "$"+r2 + ", "+ "$"+ r3;
+			    case"mult":result.append("$"+r2 + ", "+ "$"+ r3);
+			               registradores[1] = Integer.parseInt(r2); registradores[2] = Integer.parseInt(r3);
 			     	break;
-			    case"srav":result = "$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3;
+			    case"srav":result.append("$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3);
 			    	break;
 				
 	
@@ -208,37 +208,36 @@ private ULA ula = new ULA();
 			  
 			 
 			switch(resultOP){
-			case"lui":result = "$"+ r3 + ", " + convertBin(imediato);
+			case"lui":result.append("$"+ r3 + ", " + convertBin(imediato));
 				break;
-			case"addi":result = "$"+ r3 + ", " + "$"+ r2 + ", " + convertBin(imediato);
-					   ula.aritmetica("addi", Integer.parseInt(r2), 0 , Integer.parseInt(r3),"0000000000000000"+ imediato);
-					   result = result + ula.resultado();
+			case"addi":result.append("$"+ r3 + ", " + "$"+ r2 + ", " + convertBin(imediato));
+					   registradores[1] = Integer.parseInt(r3); registradores[0] = Integer.parseInt(r2); 
 				break;
-			case"slti":result = "$"+ r3 + ", $"+r2 + ", "+ convertBin(imediato);
+			case"slti":result.append("$"+ r3 + ", $"+r2 + ", "+ convertBin(imediato));
 				break;
-			case"sw":result = "$"+ r3 + ", "+convertBin(imediato)+"($"+r2+")";
+			case"sw":result.append("$"+ r3 + ", "+convertBin(imediato)+"($"+r2+")");
 				break;
-			case"lw":result = "$"+ r3 + ", "+convertBin(imediato)+"($"+r2+")";
+			case"lw":result.append("$"+ r3 + ", "+convertBin(imediato)+"($"+r2+")");
 				break;
-			case"bne":result = "$"+r2+", $"+r3+ ", "+ convertBin(imediato);
+			case"bne":result.append("$"+r2+", $"+r3+ ", "+ convertBin(imediato));
 				break;
-			case"bltz":result = "$"+r2+ ", "+ convertBin(imediato);
+			case"bltz":result.append("$"+r2+ ", "+ convertBin(imediato));
 				break;
-			case"beq":result = "$"+r2+", $"+r3 +", " + convertBin(imediato);
+			case"beq":result.append("$"+r2+", $"+r3 +", " + convertBin(imediato));
 				break;
-			case"xori":result = "$" + r3 + ", " + "$"+ r2+ ", "+ convertBin(imediato);
+			case"xori":result.append("$" + r3 + ", " + "$"+ r2+ ", "+ convertBin(imediato));
 				break;
-			case "ori":result = "$" + r3 + ", " + "$"+ r2+ ", "+ convertBin(imediato);
+			case "ori":result.append("$" + r3 + ", " + "$"+ r2+ ", "+ convertBin(imediato));
 				break;
-			case "andi":result = "$" + r3 + ", " + "$" + r2+ ", "+ convertBin(imediato);
+			case "andi":result.append("$" + r3 + ", " + "$" + r2+ ", "+ convertBin(imediato));
 				break;
-			case "addiu":result = "$" + r3 + ", " + "$" + r2+ ", "+ convertBin(imediato);
+			case "addiu":result.append("$" + r3 + ", " + "$" + r2+ ", "+ convertBin(imediato));
 				break;
-			case"lbu": result = "$"+ r3 + ", "+convertBin(imediato)+"($"+r2+")";
+			case"lbu": result.append("$"+ r3 + ", "+convertBin(imediato)+"($"+r2+")");
 				break;
-			case"lb": result = "$"+ r3 + ", "+convertBin(imediato)+"($"+r2+")";
+			case"lb": result.append("$"+ r3 + ", "+convertBin(imediato)+"($"+r2+")");
 				break;
-			case"sb": result = "$"+ r3 + ", "+convertBin(imediato)+"($"+r2+")";
+			case"sb": result.append("$"+ r3 + ", "+convertBin(imediato)+"($"+r2+")");
 			
 		}
 		
@@ -247,9 +246,9 @@ private ULA ula = new ULA();
 		if(this.tipo.equals("J")){
 			
 		switch(resultOP){	
-			case"j":result =  ", "+ convertPositv(imediato);
+			case"j":result.append(", "+ convertPositv(imediato));
 				break;
-			case"jal":result =  ", "+ convertPositv(imediato);
+			case"jal":result.append(", "+ convertPositv(imediato));
 				break;
 		}
 		}
@@ -294,6 +293,18 @@ private ULA ula = new ULA();
 		int BinarioDecimal = Integer.parseInt(bin, 2);
 		result = Integer.toString(BinarioDecimal);
 		return result;
+	}
+	
+	public String getInstrucao(){
+		return this.resultOP;
+	}
+	
+	public int[] getEntrada(){
+		return registradores;
+	}
+	
+	public String getImediato(){
+		return imediato;
 	}
 	
 	

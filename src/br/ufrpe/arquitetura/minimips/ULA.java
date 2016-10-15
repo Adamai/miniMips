@@ -14,66 +14,79 @@ public class ULA {
 	public String resultado(){
 		for(int i = 0;i<32;i++){
 			resultado+= "$"+i+ "="+ DecoderBinAsse.convertBin(registradores.getRegistrador(i))+";";
+			//System.out.println(registradores.getRegistrador(i));
 		}
 		String s = resultado;
 		resultado="";
 		return s;
 	}
 	
-	public String aritmetica(String op, int op1,int op2, int result, String imediato){
+	public void aritmetica(String op, int op1,int op2, int result, String imediato){
 		
 		switch(op){
 			
 		case"add" : registradores.setRegistrador(result,somador(registradores.getRegistrador(op1),registradores.getRegistrador(op2),op));
 			break;
+		case"subu" : registradores.setRegistrador(result, somador(registradores.getRegistrador(op1),registradores.getRegistrador(op2),op));
+			break;
 		case"addi": registradores.setRegistrador(result, somador(registradores.getRegistrador(op1),imediato,op));
+			break;
+		case"mult": multiplicador("mult",registradores.getRegistrador(op1),registradores.getRegistrador(op2));
 			break;
 			
 		
 		}
 		
-		return resultado();
 	}
 	
 	public String somador(String op1, String op2, String inst){
 		String result ="";
-		String carry = "0";
+		int a = Integer.parseInt(DecoderBinAsse.convertBin(op1));
+		int b = Integer.parseInt(DecoderBinAsse.convertBin(op2));
+		int c = 0;
+		StringBuffer bin = new StringBuffer();
 		
-		if(inst == "add"||inst =="addi"){
-			for(int i = 31;i>=0;i--){
-				if(op1.charAt(i)=='0' && op2.charAt(i)=='0'&&carry=="0"){ // 0+0+0
-					result= "0"+result;
-				}
-				else if(op1.charAt(i)=='1' && op2.charAt(i)=='0'&&carry=="0") //1+0+0
-					result = "1" + result;
-				else if(op1.charAt(i)=='0' && op2.charAt(i)=='1'&&carry=="0") // 0+1+0
-					result = "1" + result;
-				else if(op1.charAt(i)=='1' && op2.charAt(i)=='1'&&carry=="0"){ // 1+1+0
-					result = "0"+result;
-					carry = "1";
-				}
-				else if(op1.charAt(i)=='1' && op2.charAt(i)=='1'&&carry=="1"){ // 1+1+1
-					result = "1"+result;
-					carry = "1";
-				}
-				else if(op1.charAt(i)=='0' && op2.charAt(i)=='0'&&carry=="1"){ //0+0+1
-					result="1"+result;
-					carry="0";
-				}
-				else{
-					result = "0"+result;
-					carry = "1";
-				}
-					
-			}
-			
-		}
-		else{
-			//subtração
-		}
+		if(inst =="add" || inst == "addi")
+			 c = a+b;
+		else
+			 c = a-b;
 		
-		return result;
+		result = Integer.toBinaryString(c);
+		for(int i = 1;i<=32-result.length();i++){
+			if(c>0)
+				bin.append("0");
+			else
+				bin.append("1");
 		}
+			bin.append(result);
+		
+
+		return bin.toString();
+		}
+	
+	
+	public void multiplicador(String inst, String op1, String op2){
+		int a = Integer.parseInt(DecoderBinAsse.convertBin(op1));
+		int b = Integer.parseInt(DecoderBinAsse.convertBin(op2));
+		int c = 5;
+		String result ="";
+		StringBuffer bin = new StringBuffer();
+		
+		if(inst == "mult"){
+			c = a*b;
+			result = Integer.toBinaryString(c);
+		}
+			for(int i = 1;i<=64-result.length();i++){
+				if(c>0)
+					bin.append("0");
+				else
+					bin.append("1");
+		}
+			bin.append(result);
+			result = bin.toString();
+			registradores.setHi(result.substring(0, 32));
+			registradores.setLo(result.substring(32,64));
+	}
 			
 	}
 	

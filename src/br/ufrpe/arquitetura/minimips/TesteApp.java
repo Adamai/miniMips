@@ -12,19 +12,24 @@ public class TesteApp {
 		BufferedWriter escrever = new BufferedWriter(saida);
 		DecoderHexBin dec1 = new DecoderHexBin();
 		DecoderBinAsse dec2 = new DecoderBinAsse();
-		
+		Processador mips = new Processador();
 		
 		
 		String linhaEntrada = ler.readLine();
 		while(linhaEntrada!=null){
-			String result = "";
+			StringBuffer result = new StringBuffer();
+			
 			if(dec1.verify(linhaEntrada)){
 			String binario = dec1.convert(linhaEntrada);
 			result = dec2.convert2(binario);
+			
 			}
 			if(dec1.verify(linhaEntrada)==false)
-				result = "Operacao nao identificada";
+				result.append("Operacao nao identificada");
 			escrever.append(result);
+			escrever.newLine();
+			StringBuffer registradores = mips.resultInst(dec2.getInstrucao(),dec2.getEntrada(),dec2.getImediato());
+			escrever.append(registradores);
 			escrever.newLine();
 			linhaEntrada = ler.readLine();
 		}

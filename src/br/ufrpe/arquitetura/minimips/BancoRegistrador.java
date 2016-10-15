@@ -3,6 +3,8 @@ package br.ufrpe.arquitetura.minimips;
 public class BancoRegistrador {
 
 	String[]registradores;
+	String Hi = "00000000000000000000000000000000";
+	String Lo = "00000000000000000000000000000000";
 	
 	public BancoRegistrador(){
 		this.registradores = new String[32];
@@ -22,4 +24,22 @@ public class BancoRegistrador {
 	public void setRegistrador(int i, String valor){
 		registradores[i] = valor;
 	}
+
+	public String getHi() {
+		return Hi;
+	}
+
+	public void setHi(String hi) {
+		Hi = hi;
+	}
+
+	public String getLo() {
+		return Lo;
+	}
+
+	public void setLo(String lo) {
+		Lo = lo;
+	}
+	
+	
 }
