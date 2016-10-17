@@ -257,7 +257,7 @@ private int[] registradores = new int[4];
 	}
 	
 	
-	public static String convertBin(String bin){
+	public String convertBin(String bin){
 		String result="";
 		if(bin.charAt(0)=='1'){
 			String resultado = "-";
