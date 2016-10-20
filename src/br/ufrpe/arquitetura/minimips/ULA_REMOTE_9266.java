@@ -46,13 +46,6 @@ public class ULA {
 			break;
 		case"divu": multiplicador("divu",registradores.getRegistrador(op1),registradores.getRegistrador(op2));
 			break;
-<<<<<<< HEAD
-		case"mfhi": registradores.setRegistrador(result, registradores.getHi());
-			break;
-		case"mflo": registradores.setRegistrador(result, registradores.getLo());
-			break;
-=======
->>>>>>> bf3a8a588c57473af89f8580a9beb2b38f35460b
 		}
 		
 	}
