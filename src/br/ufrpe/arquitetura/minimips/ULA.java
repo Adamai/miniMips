@@ -34,8 +34,18 @@ public class ULA {
 			break;
 		case"mult": multiplicador("mult",registradores.getRegistrador(op1),registradores.getRegistrador(op2));
 			break;
-			
-		
+		case"addu" : registradores.setRegistrador(result,somador(registradores.getRegistrador(op1),registradores.getRegistrador(op2),op));
+			break;
+		case"sub" : registradores.setRegistrador(result, somador(registradores.getRegistrador(op1),registradores.getRegistrador(op2),op));
+			break;
+		case"addiu": registradores.setRegistrador(result, somador(registradores.getRegistrador(op1),imediato,op));
+			break;
+		case"multu": multiplicador("multu",registradores.getRegistrador(op1),registradores.getRegistrador(op2));
+			break;
+		case"div": multiplicador("div",registradores.getRegistrador(op1),registradores.getRegistrador(op2));
+			break;
+		case"divu": multiplicador("divu",registradores.getRegistrador(op1),registradores.getRegistrador(op2));
+			break;
 		}
 		
 	}
@@ -119,7 +129,7 @@ public class ULA {
 		int c = 0;
 		StringBuffer bin = new StringBuffer();
 		
-		if(inst =="add" || inst == "addi")
+		if(inst =="add" || inst == "addi" || inst == "addu" || inst == "addiu")
 			 c = a+b;
 		else
 			 c = a-b;
@@ -145,8 +155,12 @@ public class ULA {
 		String result ="";
 		StringBuffer bin = new StringBuffer();
 		
-		if(inst == "mult"){
+		if(inst == "mult" || inst == "multu"){
 			c = a*b;
+			result = Integer.toBinaryString(c);
+		}
+		if(inst == "div" || inst == "divu"){
+			c = a/b;
 			result = Integer.toBinaryString(c);
 		}
 			for(int i = 1;i<=64-result.length();i++){

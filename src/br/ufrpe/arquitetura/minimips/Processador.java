@@ -19,7 +19,7 @@ public class Processador {
 		switch(inst){
 		case"add" : ula.aritmetica("add",entrada[1],entrada[2],entrada[0],"");
 					break;
-		case"subu":ula.aritmetica("subu",entrada[1],entrada[2],entrada[0],"");
+		case"subu": ula.aritmetica("subu",entrada[1],entrada[2],entrada[0],"");
 					break;
 		case"addi" : ula.aritmetica("addi",entrada[0],0,entrada[1], imediato);
 					break;
@@ -45,7 +45,18 @@ public class Processador {
 					break;
 		case"slti" : ula.logica("slti",entrada[0],0,entrada[1], imediato);
 					break;
-		
+		case"addu" : ula.aritmetica("addu",entrada[1],entrada[2],entrada[0],"");
+					break;
+		case"sub": ula.aritmetica("sub",entrada[1],entrada[2],entrada[0],"");
+					break;
+		case"addiu" : ula.aritmetica("addiu",entrada[0],0,entrada[1], imediato);
+					break;
+		case"multu" : ula.aritmetica("multu",entrada[1],entrada[2],0,"");
+					break;
+		case"div" : ula.aritmetica("div",entrada[1],entrada[2],0,"");
+			break;
+		case"divu" : ula.aritmetica("divu",entrada[1],entrada[2],0,"");
+			break;
 		}
 		
 		resultado.append(ula.resultado());
