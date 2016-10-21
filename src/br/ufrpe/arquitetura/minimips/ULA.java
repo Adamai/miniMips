@@ -84,40 +84,56 @@ public class ULA {
 	public String binbit(String op1, String op2, String inst){
 		StringBuffer bin = new StringBuffer();
 		if (inst == "and" || inst == "andi"){
-			for(int i=0; i<op1.length(); i++){
-				if(op1.charAt(i) == '1' && op2.charAt(i) == '1')
-					bin.append("1");
-				else
-					bin.append("0");
-			}
-		}
-		if (inst == "or" || inst == "ori"){
-			for(int i=0; i<op1.length(); i++){
-				if(op1.charAt(i) == '1' || op2.charAt(i) == '1')
-					bin.append("1");
-				else
-					bin.append("0");
-			}
-		}
-		if (inst == "xor" || inst == "xori"){
-			for(int i=0; i<op1.length(); i++){
-				if((op1.charAt(i) == '1' && op2.charAt(i) == '0') || (op1.charAt(i) == '0' && op2.charAt(i) == '1'))
-					bin.append("1");
-				else
-					bin.append("0");
-			}
-		}
-		if (inst == "nor"){
-			for(int i=0; i<op1.length(); i++){
-				if(op1.charAt(i) == '1' || op2.charAt(i) == '1')
-					bin.append("0");
-				else
-					bin.append("1");
-			}
-		}
-		if (inst == "slt" || inst == "sltu" || inst == "slti"){ //observar sltunsigned
 			int a = Integer.parseInt(binAsse.convertBin(op1));
 			int b = Integer.parseInt(binAsse.convertBin(op2));
+			int c = a & b;
+			String result = Integer.toBinaryString(c);
+			for(int i=0; i<op1.length() - result.length(); i++){
+				bin.append(0);
+			}
+			bin.append(result);
+		}
+		if (inst == "or" || inst == "ori"){
+			int a = Integer.parseInt(binAsse.convertBin(op1));
+			int b = Integer.parseInt(binAsse.convertBin(op2));
+			int c = a | b;
+			String result = Integer.toBinaryString(c);
+			for(int i=0; i<op1.length() - result.length(); i++){
+				bin.append(0);
+			}
+			bin.append(result);
+		}
+		if (inst == "xor" || inst == "xori"){
+			int a = Integer.parseInt(binAsse.convertBin(op1));
+			int b = Integer.parseInt(binAsse.convertBin(op2));
+			int c = a ^ b;
+			String result = Integer.toBinaryString(c);
+			for(int i=0; i<op1.length() - result.length(); i++){
+				bin.append(0);
+			}
+			bin.append(result);
+		}
+		if (inst == "nor"){
+			int a = Integer.parseInt(binAsse.convertBin(op1));
+			int b = Integer.parseInt(binAsse.convertBin(op2));
+			int c = ~(a | b);
+			String result = Integer.toBinaryString(c);
+			for(int i=0; i<op1.length() - result.length(); i++){
+				bin.append(0);
+			}
+			bin.append(result);
+		}
+		if (inst == "slt" ||inst == "slti"){ //observar sltunsigned
+			int a = Integer.parseInt(binAsse.convertBin(op1));
+			int b = Integer.parseInt(binAsse.convertBin(op2));
+			if( a < b )
+				bin.append("0000000000000001");
+			else
+				bin.append("0000000000000000");
+		}
+		if (inst == "sltu"){
+			int a = Integer.parseInt(binAsse.convertPositv(op1));
+			int b = Integer.parseInt(binAsse.convertPositv(op2));
 			if( a < b )
 				bin.append("0000000000000001");
 			else
