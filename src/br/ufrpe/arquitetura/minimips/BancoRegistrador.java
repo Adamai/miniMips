@@ -10,10 +10,10 @@ public class BancoRegistrador {
 		this.registradores = new String[32];
 		for(int i = 0;i<32;i++){
 			registradores[i] = "00000000000000000000000000000000";
-			if(i == 2)
-				registradores[i] = "00000000000000000000000000000111";
-			if(i == 3)
-				registradores[i] = "00000000000000000000000000000001";
+			//if(i == 2)
+			//	registradores[i] = "00000000000000000000000000000111";
+			//if(i == 3)
+			//	registradores[i] = "00000000000000000000000000000001";
 		}
 	}
 	

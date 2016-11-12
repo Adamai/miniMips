@@ -1,14 +1,39 @@
 package br.ufrpe.arquitetura.minimips;
+import java.util.ArrayList;
 
 public class Processador {
 
 	private ULA ula;
+	private ArrayList<Instrucao>instrucoes;
+	private int PC = 0;
 	
 	public Processador(){
 		this.ula = new ULA();
+		this.instrucoes = new ArrayList<Instrucao>();
+	}
+	
+	public void pular(int pulo){
+		this.PC = pulo;
+	}
+	
+	public int getPC(){
+		return this.PC;
+	}
+	
+	public String getAssembly(){
+		return instrucoes.get(PC).getAssembly();
+	}
+	
+	public StringBuffer executar(){
+		return resultInst(instrucoes.get(PC).getInstrucao(),instrucoes.get(PC).getEntrada(),instrucoes.get(PC).getImediato());
+	}
+	
+	public void addInst(Instrucao i){
+		instrucoes.add(i);
 	}
 	
 	public StringBuffer resultInst(String inst, int[] entrada, String imediato){
+		boolean jump = false;
 		StringBuffer resultado = new StringBuffer();
 		/*entrada[0] = resultado
 		 *entrada[1] = op1
@@ -57,7 +82,11 @@ public class Processador {
 			break;
 		case"divu" : ula.aritmetica("divu",entrada[1],entrada[2],0,"");
 			break;
+	 //case "j" : ula.desvio("j"
 		}
+		
+		if(!jump) // só adiciona caso a instrução não seja de desvio
+			PC++;
 		
 		resultado.append(ula.resultado());
 		return resultado;
