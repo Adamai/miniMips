@@ -7,16 +7,14 @@ public class DecoderHexBin {
 	}
 	
 	public Boolean verify(String entrada){
-		if(entrada != null && entrada.length() == 10){
-			if(entrada.charAt(0)=='0' && entrada.charAt(1) == 'x'){
-			String hex = entrada.substring(2);
+		if(entrada != null && entrada.length() == 8){
+			String hex = entrada.substring(0);
 			int k = 0;
 			for(int i=0;i<8;i++){
 				if(47 < hex.charAt(i) && hex.charAt(i)< 58 || 96 < hex.charAt(i) && hex.charAt(i) < 103)
 					k++;	
 			} 
 			if(k==8) return true;
-			else return false;}
 			else return false;
 		} else return false;
 	}
@@ -24,7 +22,7 @@ public class DecoderHexBin {
 
 	public String convert(String entrada) {
 		String saida = "";
-		for (int i = 2; i < 10; i++) {
+		for (int i = 0; i < 8; i++) {
 			char x = entrada.charAt(i);
 			switch (x) {
 			case '0':

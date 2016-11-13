@@ -5,6 +5,7 @@ public class ULA {
 	private BancoRegistrador registradores;
 	private String resultado;
 	DecoderBinAsse binAsse = new DecoderBinAsse();
+	DecoderBinDec bindec = new DecoderBinDec();
 	
 	public ULA(){
 		this.registradores = new BancoRegistrador();
@@ -14,7 +15,7 @@ public class ULA {
 	
 	public String resultado(){
 		for(int i = 0;i<32;i++){
-			resultado+= "$"+i+ "="+ binAsse.convertBin(registradores.getRegistrador(i))+";";
+			resultado+= "$"+i+ "="+ bindec.convertBin(registradores.getRegistrador(i))+";";
 			//System.out.println(registradores.getRegistrador(i));
 		}
 		String s = resultado;
@@ -84,8 +85,8 @@ public class ULA {
 	public String binbit(String op1, String op2, String inst){
 		StringBuffer bin = new StringBuffer();
 		if (inst == "and" || inst == "andi"){
-			int a = Integer.parseInt(binAsse.convertBin(op1));
-			int b = Integer.parseInt(binAsse.convertBin(op2));
+			int a = Integer.parseInt(bindec.convertBin(op1));
+			int b = Integer.parseInt(bindec.convertBin(op2));
 			int c = a & b;
 			String result = Integer.toBinaryString(c);
 			for(int i=0; i<op1.length() - result.length(); i++){
@@ -94,8 +95,8 @@ public class ULA {
 			bin.append(result);
 		}
 		if (inst == "or" || inst == "ori"){
-			int a = Integer.parseInt(binAsse.convertBin(op1));
-			int b = Integer.parseInt(binAsse.convertBin(op2));
+			int a = Integer.parseInt(bindec.convertBin(op1));
+			int b = Integer.parseInt(bindec.convertBin(op2));
 			int c = a | b;
 			String result = Integer.toBinaryString(c);
 			for(int i=0; i<op1.length() - result.length(); i++){
@@ -104,8 +105,8 @@ public class ULA {
 			bin.append(result);
 		}
 		if (inst == "xor" || inst == "xori"){
-			int a = Integer.parseInt(binAsse.convertBin(op1));
-			int b = Integer.parseInt(binAsse.convertBin(op2));
+			int a = Integer.parseInt(bindec.convertBin(op1));
+			int b = Integer.parseInt(bindec.convertBin(op2));
 			int c = a ^ b;
 			String result = Integer.toBinaryString(c);
 			for(int i=0; i<op1.length() - result.length(); i++){
@@ -114,8 +115,8 @@ public class ULA {
 			bin.append(result);
 		}
 		if (inst == "nor"){
-			int a = Integer.parseInt(binAsse.convertBin(op1));
-			int b = Integer.parseInt(binAsse.convertBin(op2));
+			int a = Integer.parseInt(bindec.convertBin(op1));
+			int b = Integer.parseInt(bindec.convertBin(op2));
 			int c = ~(a | b);
 			String result = Integer.toBinaryString(c);
 			for(int i=0; i<op1.length() - result.length(); i++){
@@ -124,16 +125,16 @@ public class ULA {
 			bin.append(result);
 		}
 		if (inst == "slt" ||inst == "slti"){ //observar sltunsigned
-			int a = Integer.parseInt(binAsse.convertBin(op1));
-			int b = Integer.parseInt(binAsse.convertBin(op2));
+			int a = Integer.parseInt(bindec.convertBin(op1));
+			int b = Integer.parseInt(bindec.convertBin(op2));
 			if( a < b )
 				bin.append("0000000000000001");
 			else
 				bin.append("0000000000000000");
 		}
 		if (inst == "sltu"){
-			int a = Integer.parseInt(binAsse.convertPositv(op1));
-			int b = Integer.parseInt(binAsse.convertPositv(op2));
+			int a = Integer.parseInt(bindec.convertPositv(op1));
+			int b = Integer.parseInt(bindec.convertPositv(op2));
 			if( a < b )
 				bin.append("0000000000000001");
 			else
@@ -144,8 +145,8 @@ public class ULA {
 	
 	public String somador(String op1, String op2, String inst){
 		String result ="";
-		int a = Integer.parseInt(binAsse.convertBin(op1));
-		int b = Integer.parseInt(binAsse.convertBin(op2));
+		int a = Integer.parseInt(bindec.convertBin(op1));
+		int b = Integer.parseInt(bindec.convertBin(op2));
 		int c = 0;
 		StringBuffer bin = new StringBuffer();
 		
@@ -169,8 +170,8 @@ public class ULA {
 	
 	
 	public void multiplicador(String inst, String op1, String op2){
-		int a = Integer.parseInt(binAsse.convertBin(op1));
-		int b = Integer.parseInt(binAsse.convertBin(op2));
+		int a = Integer.parseInt(bindec.convertBin(op1));
+		int b = Integer.parseInt(bindec.convertBin(op2));
 		int c = 5;
 		String result ="";
 		StringBuffer bin = new StringBuffer();
