@@ -143,6 +143,7 @@ DecoderReg dereg = new DecoderReg();
 		return registradores;
 	}
 	
+	
 	public String getImediato(){
 		return imediato;
 	}

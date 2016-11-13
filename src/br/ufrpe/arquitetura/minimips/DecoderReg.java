@@ -14,8 +14,8 @@ public class DecoderReg {
 		
 		if(tipo.equals("R")){
 			   r1= bindec.convertBin(entrada.substring(16, 21)); //resposta-> 4ªseq
-			   r2= bindec.convertBin(entrada.substring(6, 11)); //operador-> 2ªseq
-			   r3= bindec.convertBin(entrada.substring(11, 16)); //operador-> 3ªseq
+			   r2= bindec.convertBin(entrada.substring(6, 11)); //operador1-> 2ªseq
+			   r3= bindec.convertBin(entrada.substring(11, 16)); //operador2-> 3ªseq
 			   r4= bindec.convertBin(entrada.substring(21,26)); //operador especial-> 5ªseq
 			  // result.append(r1 + ", "+ r2 + ", "+r3);
 			switch(resultOP){
@@ -74,16 +74,17 @@ public class DecoderReg {
 			}
 		}
 		if(tipo.equals("I")){
-		
-			 r2= bindec.convertBin(entrada.substring(6, 11)); //operador-> 2ªseq
-			 r3= bindec.convertBin(entrada.substring(11, 16)); //operador-> 3ªseq
-			  
+				//6-11 -> operador 1
+				//11-16 -> resposta
+				//16-32 -> operador imediato
+			 r2= bindec.convertBin(entrada.substring(6, 11)); //operador-> 2ªseq      
+			 r3= bindec.convertBin(entrada.substring(11, 16)); //resposta-> 3ªseq
 			 
 			switch(resultOP){
 			case"lui":result.append("$"+ r3 + ", " + bindec.convertBin(imediato));
 				break;
 			case"addi":result.append("$"+ r3 + ", " + "$"+ r2 + ", " + bindec.convertBin(imediato));
-					   registradores[1] = Integer.parseInt(r3); registradores[0] = Integer.parseInt(r2); registradores[3] = 00000; 
+					   registradores[0] = Integer.parseInt(r3); registradores[1] = Integer.parseInt(r2);
 				break;
 			case"slti":result.append("$"+ r3 + ", $"+r2 + ", "+ bindec.convertBin(imediato));
 				break;
