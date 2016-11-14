@@ -21,7 +21,8 @@ public class DecoderReg {
 			switch(resultOP){
 				case"add": result.append("$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3  /* +'\n' */   );
 						registradores[0] = Integer.parseInt(r1); registradores[1] = Integer.parseInt(r2); registradores[2] = Integer.parseInt(r3); registradores[3] = Integer.parseInt(r3);  
-				   break;
+						//System.out.println(registradores[0]+" "+registradores[1]+" "+registradores[2]+" "+registradores[3]);
+					break;
 				case"sub": result.append("$"+r1 + ", "+ "$"+ r2 + ", "+ "$"+r3);
 						registradores[0] = Integer.parseInt(r1); registradores[1] = Integer.parseInt(r2); registradores[2] = Integer.parseInt(r3); registradores[3] = Integer.parseInt(r3);
 				   break;
@@ -84,13 +85,14 @@ public class DecoderReg {
 			case"lui":result.append("$"+ r3 + ", " + bindec.convertBin(imediato));
 				break;
 			case"addi":result.append("$"+ r3 + ", " + "$"+ r2 + ", " + bindec.convertBin(imediato));
-					   registradores[0] = Integer.parseInt(r3); registradores[1] = Integer.parseInt(r2);
+					   registradores[1] = Integer.parseInt(r3); registradores[0] = Integer.parseInt(r2); registradores[2] = 00000; registradores[3] = 00000;
 				break;
 			case"slti":result.append("$"+ r3 + ", $"+r2 + ", "+ bindec.convertBin(imediato));
 				break;
 			case"sw":result.append("$"+ r3 + ", "+bindec.convertBin(imediato)+"($"+r2+")");
 				break;
 			case"lw":result.append("$"+ r3 + ", "+bindec.convertBin(imediato)+"($"+r2+")");
+					registradores[0] = Integer.parseInt(r3); 
 				break;
 			case"bne":result.append("$"+r2+", $"+r3+ ", "+ bindec.convertBin(imediato));
 				break;

@@ -28,6 +28,7 @@ public class ULA {
 		switch(op){
 			
 		case"add" : registradores.setRegistrador(result,somador(registradores.getRegistrador(op1),registradores.getRegistrador(op2),op));
+				//System.out.println(registradores.getRegistrador(op1)+" "+registradores.getRegistrador(op2)+" "+op);
 			break;
 		case"subu" : registradores.setRegistrador(result, somador(registradores.getRegistrador(op1),registradores.getRegistrador(op2),op));
 			break;
@@ -54,7 +55,7 @@ public class ULA {
 		}
 		
 	}
-			//TESTE DE MODIFICAÇÃO. AJEITAR ESSA BOSTA!
+			
 	public void logica(String op, int op1, int op2, int result, String imediato){
 		switch(op){
 		
@@ -81,6 +82,8 @@ public class ULA {
 		
 		}
 	}
+	
+	//public void datatrans(String op, int op1, int op2, )
 	
 	public String binbit(String op1, String op2, String inst){
 		StringBuffer bin = new StringBuffer();
@@ -157,7 +160,7 @@ public class ULA {
 		
 		result = Integer.toBinaryString(c);
 		for(int i = 1;i<=32-result.length();i++){
-			if(c>0)
+			if(c>=0)
 				bin.append("0");
 			else
 				bin.append("1");

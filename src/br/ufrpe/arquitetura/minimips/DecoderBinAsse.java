@@ -5,15 +5,19 @@ public class DecoderBinAsse {
 private String tipo;
 private String resultOP;
 private String imediato;
-private int[] registradores = new int[4]; 
-DecoderReg dereg = new DecoderReg();
+private int[] registradores = new int[4];
+private DecoderReg dereg;
 
+public DecoderBinAsse(){
+	this.dereg = new DecoderReg();
+}
 
 	public StringBuffer convert2(String entrada){
 
 		 verifop(entrada);
 		StringBuffer registradores = dereg.verifReg(entrada, this.tipo, this.resultOP, this.registradores, this.imediato);
-
+		//System.out.println(this.registradores[0]+" "+this.registradores[1]+" "+this.registradores[2]+" "+this.registradores[3]);
+		// registradores[] certo até aqui
 		StringBuffer resultado= new StringBuffer();
 				resultado.append(this.resultOP + " " + registradores);
 
@@ -140,6 +144,7 @@ DecoderReg dereg = new DecoderReg();
 	}
 	
 	public int[] getEntrada(){
+		//System.out.println(registradores[0]+" "+registradores[1]+" "+registradores[2]+" "+registradores[3]);
 		return registradores;
 	}
 	

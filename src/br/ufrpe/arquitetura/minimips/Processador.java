@@ -4,18 +4,20 @@ import java.util.ArrayList;
 public class Processador {
 
 	private ULA ula;
-	private ArrayList<Instrucao>instrucoes;
+	private ArrayList<Instrucao>instrucoes = new ArrayList<Instrucao>();
 	private int PC = 0;
 	
 	public Processador(){
 		this.ula = new ULA();
-		this.instrucoes = new ArrayList<Instrucao>();
+		//this.instrucoes = new ArrayList<Instrucao>();
 	}
 	
 	public void pular(int pulo){
 		this.PC = pulo;
 	}
-	
+	public void setPC(int i){
+		this.PC = i;
+	}
 	public int getPC(){
 		return this.PC;
 	}
@@ -25,11 +27,20 @@ public class Processador {
 	}
 	
 	public StringBuffer executar(){
+		//BUG
+		//int[] a =instrucoes.get(0).getEntrada();
+		//System.out.println(a[0]);
+		//System.out.println(a[0]+" "+a[1]+" "+a[2]);
 		return resultInst(instrucoes.get(PC).getInstrucao(),instrucoes.get(PC).getEntrada(),instrucoes.get(PC).getImediato());
 	}
 	
 	public void addInst(Instrucao i){
+		//int[] a = i.getEntrada();
+		//System.out.println(a[0]+" "+a[1]+" "+a[2]);
+		//funcionando
 		instrucoes.add(i);
+		//int[] a =instrucoes.get(0).getEntrada();
+		//System.out.println(a[0]);
 	}
 	
 	public StringBuffer resultInst(String inst, int[] entrada, String imediato){

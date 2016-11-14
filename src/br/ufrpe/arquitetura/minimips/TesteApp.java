@@ -23,7 +23,7 @@ public class TesteApp {
 			if(dec1.verify(linhaEntrada)){
 			String binario = dec1.convert(linhaEntrada);
 			result = dec2.convert2(binario);
-			Instrucao inst = new Instrucao(result.toString(), dec2.getInstrucao(), dec2.getEntrada(), dec2.getImediato());
+			Instrucao inst = new Instrucao(result.toString(), dec2.getInstrucao(), dec2.getEntrada() /*<- funcionando*/, dec2.getImediato());
 			mips.addInst(inst);
 			linhaEntrada = ler.readLine();
 			counter++;
@@ -31,7 +31,6 @@ public class TesteApp {
 			if(dec1.verify(linhaEntrada)==false)
 				result.append("Operacao nao identificada");
 		}
-		
 		while(counter!= mips.getPC()){
 			escrever.append(mips.getAssembly());
 			escrever.newLine();
