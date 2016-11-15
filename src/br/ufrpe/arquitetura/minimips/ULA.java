@@ -83,7 +83,52 @@ public class ULA {
 		}
 	}
 	
+	public void shift(String op, int op1, int opsp, int result){
+		switch(op){
+		case"sll": registradores.setRegistrador(result, shiftbit(registradores.getRegistrador(op1), registradores.getRegistrador(opsp), op));
+			break;
+		case"srl": registradores.setRegistrador(result, shiftbit(registradores.getRegistrador(op1), registradores.getRegistrador(opsp), op));
+			break;
+		case"sra": registradores.setRegistrador(result, shiftbit(registradores.getRegistrador(op1), registradores.getRegistrador(opsp), op));
+		}
+	}
+	
 	//public void datatrans(String op, int op1, int op2, )
+	
+	public String shiftbit(String op1, String opsp, String inst){
+		StringBuffer bin = new StringBuffer();
+		if(inst == "sll"){
+			int a = Integer.parseInt(bindec.convertBin(op1));
+			int b = Integer.parseInt(bindec.convertBin(opsp));
+			int c = a << b;
+			String result = Integer.toBinaryString(c);
+			for(int i=0; i<op1.length() - result.length(); i++){
+				bin.append(0);
+			}
+			bin.append(result);
+		}
+		if(inst == "sra"){
+			int a = Integer.parseInt(bindec.convertBin(op1));
+			int b = Integer.parseInt(bindec.convertBin(opsp));
+			int c = a >> b;
+			String result = Integer.toBinaryString(c);
+			for(int i=0; i<op1.length() - result.length(); i++){
+				bin.append(0);
+			}
+			bin.append(result);
+		}
+		if(inst == "srl"){
+			int a = Integer.parseInt(bindec.convertBin(op1));
+			int b = Integer.parseInt(bindec.convertBin(opsp));
+			int c = a >>> b;
+			String result = Integer.toBinaryString(c);
+			for(int i=0; i<op1.length() - result.length(); i++){
+				bin.append(0);
+			}
+			bin.append(result);
+		}
+		return bin.toString();
+	}
 	
 	public String binbit(String op1, String op2, String inst){
 		StringBuffer bin = new StringBuffer();

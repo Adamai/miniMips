@@ -1,10 +1,10 @@
 package br.ufrpe.arquitetura.minimips;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class Processador {
 
 	private ULA ula;
-	private ArrayList<Instrucao>instrucoes = new ArrayList<Instrucao>();
+	private Instrucao[] instrucoes = new Instrucao[100];
 	private int PC = 0;
 	
 	public Processador(){
@@ -23,7 +23,7 @@ public class Processador {
 	}
 	
 	public String getAssembly(){
-		return instrucoes.get(PC).getAssembly();
+		return instrucoes[PC].getAssembly();
 	}
 	
 	public StringBuffer executar(){
@@ -31,14 +31,15 @@ public class Processador {
 		//int[] a =instrucoes.get(0).getEntrada();
 		//System.out.println(a[0]);
 		//System.out.println(a[0]+" "+a[1]+" "+a[2]);
-		return resultInst(instrucoes.get(PC).getInstrucao(),instrucoes.get(PC).getEntrada(),instrucoes.get(PC).getImediato());
+		return resultInst(instrucoes[PC].getInstrucao(),instrucoes[PC].getEntrada(),instrucoes[PC].getImediato());
 	}
-	
+	int instadd = 0;
 	public void addInst(Instrucao i){
 		//int[] a = i.getEntrada();
 		//System.out.println(a[0]+" "+a[1]+" "+a[2]);
 		//funcionando
-		instrucoes.add(i);
+		instrucoes[instadd] = i;
+		instadd++;
 		//int[] a =instrucoes.get(0).getEntrada();
 		//System.out.println(a[0]);
 	}
@@ -92,6 +93,12 @@ public class Processador {
 		case"div" : ula.aritmetica("div",entrada[1],entrada[2],0,"");
 			break;
 		case"divu" : ula.aritmetica("divu",entrada[1],entrada[2],0,"");
+			break;
+		case"sll": ula.shift("sll", entrada[1], entrada[3], entrada[0]);
+			break;
+		case"srl": ula.shift("srl", entrada[1], entrada[3], entrada[0]);
+			break;
+		case"sra": ula.shift("sra", entrada[1], entrada[3], entrada[0]);
 			break;
 	 //case "j" : ula.desvio("j"
 		}
