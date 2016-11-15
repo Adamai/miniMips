@@ -6,6 +6,7 @@ public class Processador {
 	private ULA ula;
 	private Instrucao[] instrucoes = new Instrucao[100];
 	private int PC = 0;
+	private int instadd = 0;
 	
 	public Processador(){
 		this.ula = new ULA();
@@ -33,13 +34,15 @@ public class Processador {
 		//System.out.println(a[0]+" "+a[1]+" "+a[2]);
 		return resultInst(instrucoes[PC].getInstrucao(),instrucoes[PC].getEntrada(),instrucoes[PC].getImediato());
 	}
-	int instadd = 0;
+	
 	public void addInst(Instrucao i){
 		//int[] a = i.getEntrada();
 		//System.out.println(a[0]+" "+a[1]+" "+a[2]);
 		//funcionando
 		instrucoes[instadd] = i;
 		instadd++;
+		int[]teste = instrucoes[0].getEntrada();
+		//System.out.println(teste[0]);
 		//int[] a =instrucoes.get(0).getEntrada();
 		//System.out.println(a[0]);
 	}
@@ -58,7 +61,7 @@ public class Processador {
 					break;
 		case"subu": ula.aritmetica("subu",entrada[1],entrada[2],entrada[0],"");
 					break;
-		case"addi" : ula.aritmetica("addi",entrada[0],0,entrada[1], imediato);
+		case"addi" : ula.aritmetica("addi",entrada[1],0,entrada[0], imediato);
 					break;
 		case"mult" : ula.aritmetica("mult",entrada[1],entrada[2],0,"");
 					break;
@@ -100,7 +103,9 @@ public class Processador {
 			break;
 		case"sra": ula.shift("sra", entrada[1], entrada[3], entrada[0]);
 			break;
-	 //case "j" : ula.desvio("j"
+	   case "j" :  //PC = ula.desvio("j",0,0,0,imediato);   //Algo tipo isso para operaçoes que envolvem desvio incodicional , tá feito na ula, n sei se funciona
+	   			   //jump = true;						    //Para caso de desvio condicional o valor é calculado em relaçao a PC. Ex: PC + 5, PC - 10
+	   			   break;
 		}
 		
 		if(!jump) // só adiciona caso a instrução não seja de desvio

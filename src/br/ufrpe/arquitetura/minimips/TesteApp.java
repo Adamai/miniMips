@@ -6,9 +6,9 @@ public class TesteApp {
 	public static void main(String[] args){
 		try{
 		
-		FileReader entrada = new FileReader("miniMips/arquivos/entrada.txt");
+		FileReader entrada = new FileReader("arquivos/entrada.txt");
 		BufferedReader ler = new BufferedReader(entrada);
-		FileWriter saida = new FileWriter("miniMips/arquivos/saida.txt");
+		FileWriter saida = new FileWriter("arquivos/saida.txt");
 		BufferedWriter escrever = new BufferedWriter(saida);
 		DecoderHexBin dec1 = new DecoderHexBin();
 		DecoderBinAsse dec2 = new DecoderBinAsse();
@@ -28,7 +28,7 @@ public class TesteApp {
 			Instrucao inst = new Instrucao(result.toString(), dec2.getInstrucao(), dec2.getEntrada() /*<- funcionando*/, dec2.getImediato());
 			memoria.addInstrucao(inst);
 			mips.addInst(inst);
-			System.out.println(inst.getEntrada()[0]+" "+inst.getEntrada()[1]+" "+inst.getEntrada()[2]+" "+inst.getEntrada()[3]);
+			//System.out.println(inst.getEntrada()[0]+" "+inst.getEntrada()[1]+" "+inst.getEntrada()[2]+" "+inst.getEntrada()[3]);
 			linhaEntrada = ler.readLine();
 			counter++;
 			}

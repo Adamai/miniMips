@@ -14,7 +14,7 @@ public class DecoderReg {
 		
 		if(tipo.equals("R")){
 			   r1= bindec.convertBin(entrada.substring(16, 21)); //resposta-> 4ªseq
-			   r2= bindec.convertBin(entrada.substring(6, 11)); //operador1-> 2ªseq
+			   r2= bindec.convertPositv(entrada.substring(6, 11)); //operador1-> 2ªseq // acho que todos devem ser convertPositiv
 			   r3= bindec.convertBin(entrada.substring(11, 16)); //operador2-> 3ªseq
 			   r4= bindec.convertBin(entrada.substring(21,26)); //operador especial-> 5ªseq
 			  // result.append(r1 + ", "+ r2 + ", "+r3);

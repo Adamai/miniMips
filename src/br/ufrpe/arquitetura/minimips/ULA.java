@@ -55,6 +55,16 @@ public class ULA {
 		}
 		
 	}
+	
+	public int desvio(String op, int op1,int op2, int result, String imediato){
+		int desvio = 0;
+		switch(op){
+		case"j": desvio = Integer.parseInt(bindec.convertBin(imediato));
+			break;
+		}
+		
+		return desvio;
+	}
 			
 	public void logica(String op, int op1, int op2, int result, String imediato){
 		switch(op){
