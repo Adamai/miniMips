@@ -15,6 +15,9 @@ public class ULA {
 	
 	public String resultado(){
 		for(int i = 0;i<32;i++){
+			if(i==31){int ka = 4*Integer.parseInt(bindec.convertBin(registradores.getRegistrador(i)));
+				resultado+= "$"+i+ "="+ Integer.toString(ka)+";";
+			} else
 			resultado+= "$"+i+ "="+ bindec.convertBin(registradores.getRegistrador(i))+";";
 			//System.out.println(registradores.getRegistrador(i));
 		}
@@ -28,7 +31,6 @@ public class ULA {
 		switch(op){
 			
 		case"add" : registradores.setRegistrador(result,somador(registradores.getRegistrador(op1),registradores.getRegistrador(op2),op));
-				//System.out.println(registradores.getRegistrador(op1)+" "+registradores.getRegistrador(op2)+" "+op);
 			break;
 		case"subu" : registradores.setRegistrador(result, somador(registradores.getRegistrador(op1),registradores.getRegistrador(op2),op));
 			break;
@@ -56,11 +58,41 @@ public class ULA {
 		
 	}
 	
-	public int desvio(String op, int op1,int op2, int result, String imediato){
+	public int desvio(String op, int op1,int op2, int result, String imediato, int PC){
 		int desvio = 0;
+		//int kek = Integer.parseInt(bindec.convertBin(imediato))/4;
 		switch(op){
 		case"j": desvio = Integer.parseInt(bindec.convertBin(imediato));
 			break;
+		case"jr": desvio = Integer.parseInt(bindec.convertPositv(registradores.getRegistrador(op1)));
+			break;
+		case"jal": desvio = Integer.parseInt(bindec.convertBin(imediato));
+					StringBuffer bin = new StringBuffer();
+					String a = Integer.toBinaryString(PC+1);
+					for(int i=0; i<32-a.length();i++)
+						bin.append("0");
+					bin.append(a);
+					registradores.setRegistrador(31, bin.toString());
+			break;
+		case"beq": desvio = Integer.parseInt(bindec.convertBin(imediato));
+					if(registradores.getRegistrador(op1)==registradores.getRegistrador(op2))
+						desvio = PC +1+ Integer.parseInt(bindec.convertBin(imediato));
+					else
+						desvio = PC+1;
+			break;
+		case"bne": desvio = Integer.parseInt(bindec.convertBin(imediato));
+					if(registradores.getRegistrador(op1)!=registradores.getRegistrador(op2))
+						desvio = PC+ 1 + Integer.parseInt(bindec.convertBin(imediato));
+					else
+						desvio = PC+1;
+			break;
+		case"bltz": desvio = Integer.parseInt(bindec.convertBin(imediato));
+				if(Integer.parseInt(bindec.convertBin(registradores.getRegistrador(op1))) < 0)
+					desvio = PC +1+ Integer.parseInt(bindec.convertBin(imediato));
+				else
+					desvio = PC+1;
+			break;
+			
 		}
 		
 		return desvio;
@@ -103,6 +135,47 @@ public class ULA {
 		}
 	}
 	
+	public void data(String op, int op1, int op2, String imediato, Mem memory){
+		int address = Integer.parseInt(bindec.convertBin(registradores.getRegistrador(op2))) + Integer.parseInt(bindec.convertBin(imediato));
+				//System.out.println(address);
+		switch(op){
+		case"sw":	int end; StringBuffer adder = new StringBuffer();
+					for(int i=0;i<registradores.getRegistrador(op1).length();i++){
+						if(registradores.getRegistrador(op1).charAt(i)=='1'){
+							for( ;i<registradores.getRegistrador(op1).length();i=i+8){
+							end = i + 8;
+							if(end >= registradores.getRegistrador(op1).length())
+								end = 32;
+							if(registradores.getRegistrador(op1).substring(i, end).length()<8){
+									adder.append(registradores.getRegistrador(op1).substring(i, end));
+									for(int x=0;x<8 - registradores.getRegistrador(op1).substring(i, end).length(); x++){
+										adder.append("0");
+									}}else if (registradores.getRegistrador(op1).substring(i, end).length()==8)
+							adder.append(registradores.getRegistrador(op1).substring(i, end));
+							//System.out.println(registradores.getRegistrador(op1).substring(i, end));
+							memory.storebyte(adder.toString(), address);
+							address++;
+							}
+						}
+					}
+					
+					/*memory.storebyte(registradores.getRegistrador(op1).substring(0, 8), address);
+					memory.storebyte(registradores.getRegistrador(op1).substring(8, 16), address+1);
+					memory.storebyte(registradores.getRegistrador(op1).substring(16, 24), address+2);
+					memory.storebyte(registradores.getRegistrador(op1).substring(24, 32), address+3);*/
+			break;
+		case"sb":	 memory.storebyte(registradores.getRegistrador(op1).substring(24, 32), address);
+			break;
+		case"lw":	 registradores.setRegistrador(op1, memory.loadbyte(address)+memory.loadbyte(address+1)+memory.loadbyte(address+2)+memory.loadbyte(address+3));
+			break;
+		case"lb":	 registradores.setRegistrador(op1, memory.loadbytezero(address));
+		//System.out.println(memory.loadbytezero(address));
+			break;
+		case"lbu":	registradores.setRegistrador(op1, memory.loadbytezeroU(address));
+			break;
+		}
+	}
+	
 	//public void datatrans(String op, int op1, int op2, )
 	
 	public String shiftbit(String op1, String opsp, String inst){
@@ -113,7 +186,7 @@ public class ULA {
 			int c = a << b;
 			String result = Integer.toBinaryString(c);
 			for(int i=0; i<op1.length() - result.length(); i++){
-				bin.append(0);
+				bin.append("0");
 			}
 			bin.append(result);
 		}
@@ -123,7 +196,7 @@ public class ULA {
 			int c = a >> b;
 			String result = Integer.toBinaryString(c);
 			for(int i=0; i<op1.length() - result.length(); i++){
-				bin.append(0);
+				bin.append("0");
 			}
 			bin.append(result);
 		}
@@ -133,7 +206,7 @@ public class ULA {
 			int c = a >>> b;
 			String result = Integer.toBinaryString(c);
 			for(int i=0; i<op1.length() - result.length(); i++){
-				bin.append(0);
+				bin.append("0");
 			}
 			bin.append(result);
 		}
@@ -148,7 +221,7 @@ public class ULA {
 			int c = a & b;
 			String result = Integer.toBinaryString(c);
 			for(int i=0; i<op1.length() - result.length(); i++){
-				bin.append(0);
+				bin.append("0");
 			}
 			bin.append(result);
 		}
@@ -158,7 +231,7 @@ public class ULA {
 			int c = a | b;
 			String result = Integer.toBinaryString(c);
 			for(int i=0; i<op1.length() - result.length(); i++){
-				bin.append(0);
+				bin.append("0");
 			}
 			bin.append(result);
 		}
@@ -168,7 +241,7 @@ public class ULA {
 			int c = a ^ b;
 			String result = Integer.toBinaryString(c);
 			for(int i=0; i<op1.length() - result.length(); i++){
-				bin.append(0);
+				bin.append("0");
 			}
 			bin.append(result);
 		}
@@ -178,7 +251,7 @@ public class ULA {
 			int c = ~(a | b);
 			String result = Integer.toBinaryString(c);
 			for(int i=0; i<op1.length() - result.length(); i++){
-				bin.append(0);
+				bin.append("0");
 			}
 			bin.append(result);
 		}

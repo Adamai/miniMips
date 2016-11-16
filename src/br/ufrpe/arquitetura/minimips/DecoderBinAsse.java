@@ -13,7 +13,7 @@ public DecoderBinAsse(){
 }
 
 	public StringBuffer convert2(String entrada){
-		int[] regist = new int[4];
+		//int[] regist = new int[4];
 		 verifop(entrada);
 		StringBuffer registradores = dereg.verifReg(entrada, this.tipo, this.resultOP, this.registradores, this.imediato);
 		//System.out.println(this.registradores[0]+" "+this.registradores[1]+" "+this.registradores[2]+" "+this.registradores[3]);

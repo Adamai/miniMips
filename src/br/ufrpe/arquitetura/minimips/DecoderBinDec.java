@@ -9,6 +9,13 @@ public class DecoderBinDec {
 	}
 	
 	public String convertBin(String bin){
+		int jjj=0;
+		for(int kkk=0;kkk<bin.length();kkk++){
+			if(bin.charAt(kkk)=='1')
+				jjj++;
+		}
+		if(jjj==bin.length())
+			return "-1";
 		String result="";
 		if(bin.charAt(0)=='1'){
 			String resultado = "-";

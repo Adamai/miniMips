@@ -113,16 +113,16 @@ public class DecoderReg {
 					registradores[1] = Integer.parseInt(r3); registradores[2] = Integer.parseInt(r2);
 				break;
 			case"lw":result.append("$"+ r3 + ", "+bindec.convertBin(imediato)+"($"+r2+")");
-					registradores[0] = Integer.parseInt(r3); registradores[1] = Integer.parseInt(r2);
+			registradores[1] = Integer.parseInt(r3); registradores[2] = Integer.parseInt(r2);
 				break;
 			case"bne":result.append("$"+r2+", $"+r3+ ", "+ bindec.convertBin(imediato));
-					registradores[1] = Integer.parseInt(r3); registradores[2] = Integer.parseInt(r2);
+					registradores[1] = Integer.parseInt(r2); registradores[2] = Integer.parseInt(r3);
 				break;
 			case"bltz":result.append("$"+r2+ ", "+ bindec.convertBin(imediato));
-					registradores[1] = Integer.parseInt(r3); registradores[2] = Integer.parseInt(r2);
+					registradores[1] = Integer.parseInt(r2);
 				break;
 			case"beq":result.append("$"+r2+", $"+r3 +", " + bindec.convertBin(imediato));
-					registradores[1] = Integer.parseInt(r3); registradores[2] = Integer.parseInt(r2);
+					registradores[1] = Integer.parseInt(r2); registradores[2] = Integer.parseInt(r3);
 				break;
 			case"xori":result.append("$" + r3 + ", " + "$"+ r2+ ", "+ bindec.convertBin(imediato));
 					registradores[0] = Integer.parseInt(r3); registradores[1] = Integer.parseInt(r2);
@@ -137,13 +137,13 @@ public class DecoderReg {
 					registradores[1] = Integer.parseInt(r2); registradores[0] = Integer.parseInt(r3);
 				break;
 			case"lbu": result.append("$"+ r3 + ", "+bindec.convertBin(imediato)+"($"+r2+")");
-					registradores[0] = Integer.parseInt(r3); registradores[1] = Integer.parseInt(r2);
+			registradores[1] = Integer.parseInt(r3); registradores[2] = Integer.parseInt(r2);
 				break;
 			case"lb": result.append("$"+ r3 + ", "+bindec.convertBin(imediato)+"($"+r2+")");
-					registradores[0] = Integer.parseInt(r3); registradores[1] = Integer.parseInt(r2);
+			registradores[1] = Integer.parseInt(r3); registradores[2] = Integer.parseInt(r2);
 				break;
 			case"sb": result.append("$"+ r3 + ", "+bindec.convertBin(imediato)+"($"+r2+")");
-					registradores[1] = Integer.parseInt(r3); registradores[2] = Integer.parseInt(r2);
+			registradores[1] = Integer.parseInt(r3); registradores[2] = Integer.parseInt(r2);
 			
 		}
 		

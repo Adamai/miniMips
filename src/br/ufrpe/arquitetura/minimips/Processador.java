@@ -4,11 +4,13 @@ package br.ufrpe.arquitetura.minimips;
 public class Processador {
 
 	private ULA ula;
-	private Instrucao[] instrucoes = new Instrucao[100];
+	private Instrucao[] instrucoes = new Instrucao[8000];
 	private int PC = 0;
 	private int instadd = 0;
+	private Mem memory;
 	
 	public Processador(){
+		this.memory = new Mem();
 		this.ula = new ULA();
 		//this.instrucoes = new ArrayList<Instrucao>();
 	}
@@ -24,6 +26,7 @@ public class Processador {
 	}
 	
 	public String getAssembly(){
+		//System.out.println(PC +" "+ instrucoes[PC].getAssembly());
 		return instrucoes[PC].getAssembly();
 	}
 	
@@ -41,7 +44,7 @@ public class Processador {
 		//funcionando
 		instrucoes[instadd] = i;
 		instadd++;
-		int[]teste = instrucoes[0].getEntrada();
+		//int[]teste = instrucoes[0].getEntrada();
 		//System.out.println(teste[0]);
 		//int[] a =instrucoes.get(0).getEntrada();
 		//System.out.println(a[0]);
@@ -103,9 +106,34 @@ public class Processador {
 			break;
 		case"sra": ula.shift("sra", entrada[1], entrada[3], entrada[0]);
 			break;
-	   case "j" :  //PC = ula.desvio("j",0,0,0,imediato);   //Algo tipo isso para operaçoes que envolvem desvio incodicional , tá feito na ula, n sei se funciona
-	   			   //jump = true;						    //Para caso de desvio condicional o valor é calculado em relaçao a PC. Ex: PC + 5, PC - 10
+		case"sw":ula.data("sw", entrada[1], entrada[2], imediato, memory);
+			break;
+		case"sb":ula.data("sb", entrada[1], entrada[2], imediato, memory);
+			break;
+		case"lw":ula.data("lw", entrada[1], entrada[2], imediato, memory);
+			break;
+		case"lb":ula.data("lb", entrada[1], entrada[2], imediato, memory);
+			break;
+		case"lbu":ula.data("lbu", entrada[1], entrada[2], imediato, memory);
+			break;
+	  case "j" :  PC = ula.desvio("j",0,0,0,imediato, PC);   //Algo tipo isso para operaçoes que envolvem desvio incodicional , tá feito na ula, n sei se funciona
+	   			   jump = true;						    //Para caso de desvio condicional o valor é calculado em relaçao a PC. Ex: PC + 5, PC - 10
 	   			   break;
+	   case "jr" :  PC = ula.desvio("jr",entrada[1],0,0,imediato, PC);   
+		   jump = true;						    
+		   break;
+	   case "jal" :  PC = ula.desvio("jal",0,0,0,imediato, PC);   //usa imediato
+		   jump = true;						 
+		   break;
+	   case "beq" :  PC = ula.desvio("beq",entrada[1],entrada[2],0,imediato, PC);   //usa imediato
+		   jump = true;						   
+		   break;
+	   case "bne" :  PC = ula.desvio("bne",entrada[1],entrada[2],0,imediato, PC);  //usa imediato
+		   jump = true;						   
+		   break;
+	   case "bltz" :  PC = ula.desvio("bltz",entrada[1],0,0,imediato, PC);   //usa imediato
+		   jump = true;						    
+		   break;
 		}
 		
 		if(!jump) // só adiciona caso a instrução não seja de desvio
