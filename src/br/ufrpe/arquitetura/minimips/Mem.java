@@ -42,6 +42,7 @@ public class Mem {
 	
 	public void storebyte(String binbyte, int address){		//salva a string de um byte em binario no endereço address
 		this.memory[address] = Integer.parseInt(debindec.convertPositv(binbyte));
+		//System.out.println(binbyte);
 		//System.out.println(address+" "+this.memory[address]);
 		
 	}
@@ -52,6 +53,11 @@ public class Mem {
 			bin.append("0");
 		}
 		bin.append(Integer.toBinaryString(this.memory[address]));
+		if(Integer.toBinaryString(this.memory[address]).length() > 8){
+			//System.out.println(Integer.toBinaryString(this.memory[address]));
+			//System.out.println(address);
+		}
+		//System.out.println(bin.toString());
 		return bin.toString();
 	}
 	

@@ -36,17 +36,17 @@ public class TesteApp {
 				result.append("Operacao nao identificada");
 		}
 		
-		while(counter!= mips.getPC()){ int f=0;
-			if(!mips.getAssembly().substring(0, 3).equals("j ,")){
+		while(counter!= mips.getPC()){ 
+			
 			escrever.append(mips.getAssembly());
 			//System.out.println(mips.getAssembly());
-			escrever.newLine();  f =1;}
+			escrever.newLine();
 			StringBuffer registradores = mips.executar();
-			if(f==1){
+			
 			escrever.append(registradores);
 			escrever.newLine();}
 			
-		}
+		
 		ler.close();
 		
 		escrever.close();

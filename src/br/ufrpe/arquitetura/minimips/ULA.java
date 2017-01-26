@@ -139,7 +139,18 @@ public class ULA {
 		int address = Integer.parseInt(bindec.convertBin(registradores.getRegistrador(op2))) + Integer.parseInt(bindec.convertBin(imediato));
 				//System.out.println(address);
 		switch(op){
-		case"sw":	int end; StringBuffer adder = new StringBuffer();
+		case"sw":	//sw $t1,-100($t2)   Store word : Armazena a palavra (4 bytes) do registrador $t1 no endereço de memória
+					//representado pela soma do endereço base ($t2) + deslocamento (nesse exemplo, -100)
+					String wordsave = registradores.getRegistrador(op1);
+					System.out.println(wordsave);
+					memory.storebyte(wordsave.substring(0,8), address);
+					memory.storebyte(wordsave.substring(8, 16), address+1);
+					memory.storebyte(wordsave.substring(16, 24), address+2);
+					memory.storebyte(wordsave.substring(24, 32), address+3);
+			
+			
+			
+			/*int end; StringBuffer adder = new StringBuffer();
 					for(int i=0;i<registradores.getRegistrador(op1).length();i++){
 						if(registradores.getRegistrador(op1).charAt(i)=='1'){
 							for( ;i<registradores.getRegistrador(op1).length();i=i+8){
@@ -154,10 +165,11 @@ public class ULA {
 							adder.append(registradores.getRegistrador(op1).substring(i, end));
 							//System.out.println(registradores.getRegistrador(op1).substring(i, end));
 							memory.storebyte(adder.toString(), address);
+							System.out.println("pipoca");
 							address++;
 							}
 						}
-					}
+					}*/
 					
 					/*memory.storebyte(registradores.getRegistrador(op1).substring(0, 8), address);
 					memory.storebyte(registradores.getRegistrador(op1).substring(8, 16), address+1);
@@ -165,8 +177,11 @@ public class ULA {
 					memory.storebyte(registradores.getRegistrador(op1).substring(24, 32), address+3);*/
 			break;
 		case"sb":	 memory.storebyte(registradores.getRegistrador(op1).substring(24, 32), address);
+					//System.out.println(registradores.getRegistrador(op1).substring(24, 32));
+					//System.out.println(address);
 			break;
 		case"lw":	 registradores.setRegistrador(op1, memory.loadbyte(address)+memory.loadbyte(address+1)+memory.loadbyte(address+2)+memory.loadbyte(address+3));
+			//System.out.print(address);
 			break;
 		case"lb":	 registradores.setRegistrador(op1, memory.loadbytezero(address));
 		//System.out.println(memory.loadbytezero(address));
