@@ -37,8 +37,20 @@ public class TesteApp {
 		}
 		
 		while(counter!= mips.getPC()){ 
-			
-			escrever.append(mips.getAssembly());
+			int virgulaj = 0;
+			String jsemvirgula="";
+			if(mips.getAssembly().substring(0, 5).equals("jal ,")){
+				jsemvirgula = "jal"+mips.getAssembly().substring(5);
+				virgulaj = 1;
+			}
+			else if(mips.getAssembly().substring(0, 3).equals("j ,")){
+				jsemvirgula = "j"+mips.getAssembly().substring(3);
+				virgulaj = 1;
+			}
+			if(virgulaj==1)
+				escrever.append(jsemvirgula);
+			else
+				escrever.append(mips.getAssembly());
 			//System.out.println(mips.getAssembly());
 			escrever.newLine();
 			StringBuffer registradores = mips.executar();
