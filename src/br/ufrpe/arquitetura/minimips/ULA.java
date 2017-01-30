@@ -140,13 +140,13 @@ public class ULA {
 				//System.out.println(address);
 		switch(op){
 		case"sw":	//sw $t1,-100($t2)   Store word : Armazena a palavra (4 bytes) do registrador $t1 no endereço de memória
-					//representado pela soma do endereço base ($t2) + deslocamento (nesse exemplo, -100)
+					//representado pela soma do endereço base ($t2) + deslocamento (nesse exemplo, -100) DE TRAZ PRA FRENTE
 					String wordsave = registradores.getRegistrador(op1);
-					System.out.println(wordsave);
-					memory.storebyte(wordsave.substring(0,8), address);
-					memory.storebyte(wordsave.substring(8, 16), address+1);
-					memory.storebyte(wordsave.substring(16, 24), address+2);
-					memory.storebyte(wordsave.substring(24, 32), address+3);
+					//System.out.println(wordsave);
+					memory.storebyte(wordsave.substring(24,32), address);
+					memory.storebyte(wordsave.substring(16, 24), address+1);
+					memory.storebyte(wordsave.substring(8, 16), address+2);
+					memory.storebyte(wordsave.substring(0, 8), address+3);
 			
 			
 			
@@ -180,7 +180,7 @@ public class ULA {
 					//System.out.println(registradores.getRegistrador(op1).substring(24, 32));
 					//System.out.println(address);
 			break;
-		case"lw":	 registradores.setRegistrador(op1, memory.loadbyte(address)+memory.loadbyte(address+1)+memory.loadbyte(address+2)+memory.loadbyte(address+3));
+		case"lw":	 registradores.setRegistrador(op1, memory.loadbyte(address+3)+memory.loadbyte(address+2)+memory.loadbyte(address+1)+memory.loadbyte(address));
 			//System.out.print(address);
 			break;
 		case"lb":	 registradores.setRegistrador(op1, memory.loadbytezero(address));
